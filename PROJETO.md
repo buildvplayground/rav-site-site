@@ -24,18 +24,27 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
 
 ## Pendências que dependem do usuário
 - Hospedagem final (Vercel vs Hostinger/WordPress) — usando HTML estático como default até decisão.
-- GTM/GA4/Meta Pixel/Google Ads IDs — não fornecidos, módulos de tags ficam pendentes (etapa 7).
-- Domínio final das 2 LPs.
+- GTM/GA4/Meta Pixel/Google Ads IDs — não fornecidos, módulos de tag pulados (o cookie consent já dispara `dataLayer`, pronto para quando o GTM entrar).
+- Domínio final das 2 LPs — canonical usa `www.ravobras.com.br` como placeholder.
 - Confirmação do WhatsApp (11) 94701-8958 como número oficial de conversão (aparece também um número alternativo 11 94791-3486 no PDF institucional — sinalizado para reconciliação do cliente).
+- E-mail de contato oficial (usado `contato@ravobras.com.br` como placeholder no backend/política de privacidade).
+- Backend PHP (`form-handler.php`/`admin.php`/`db-config.php`) instalado mas não configurado — falta host/banco/usuário/senha reais e nova senha de admin antes do deploy.
+- 3 fotos brutas corrompidas no download do Drive (0 bytes) — ver `imagens/tratadas/MANIFESTO.md`.
 
 ## Checklist do pipeline
 - [x] 1. Material extraído do Drive
 - [x] 2. Pastas organizadas (scaffold-projeto) + logo extraída do MIV
-- [ ] 2b. Repositório GitHub criado
-- [ ] 3. Design system (skill: design-system)
-- [ ] 4. Copy das 2 LPs estruturada para o front-end (skill: extrair-copy)
-- [ ] 5. Front-end das 2 LPs criado (skill: gerar-frontend)
-- [ ] 6. Ajustes finais (responsivo, imagens tratadas, animações)
-- [ ] 7. Tags instaladas (skill: instalar-tags) + módulos LGPD
-- [ ] 8. Revisão humana
-- [ ] 9. Deploy
+- [x] 2b. Repositório GitHub criado
+- [x] 3. Design system (skill: design-system)
+- [x] 4. Copy das 2 LPs estruturada para o front-end (skill: extrair-copy)
+- [x] 5. Front-end das 2 LPs criado (skill: gerar-frontend) — `Site/index.html` (Obras) +
+      `Site/reformas.html` (Reformas), CSS/JS compartilhados, auditado via
+      `revisar-frontend` (0 achados bloqueantes ao final; ver `brief-pack.md` §7)
+- [x] 6. Ajustes finais — imagens em `.webp`, responsivo 320–1280px sem overflow, menu
+      mobile/lightbox/FAQ/tabela comparativa testados funcionalmente
+- [x] 7. Módulos LGPD instalados — banner de cookies (dispara `dataLayer`), modal de
+      Política de Privacidade, páginas `Site/fornecedores/` e `Site/trabalhe-conosco/`,
+      backend PHP (`form-handler.php`/`admin.php`/`db-config.php`, não configurado).
+      Tags de analytics (GTM/GA4/Pixel/Ads) puladas — sem IDs do cliente.
+- [ ] 8. 🛑 Revisão humana — **aguardando o usuário** revisar o preview e aprovar
+- [ ] 9. 🛑 Deploy — aguarda aprovação da etapa 8 + hospedagem/domínio/secrets

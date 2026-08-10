@@ -3,30 +3,34 @@
   "slug": "rav-site",
   "segmento": "Construção civil — obras e reformas comerciais/corporativas (B2B)",
   "escopo": "2 landing pages independentes: Obras Comerciais (turnkey) e Reformas Comerciais (drywall/pisos)",
-  "etapa_atual": 5,
+  "etapa_atual": 8,
   "etapas": [
     { "n": 1, "nome": "Extração do Drive", "status": "done" },
     { "n": 2, "nome": "Scaffold do projeto + logo extraída do MIV", "status": "done" },
     { "n": "2b", "nome": "Repositório GitHub", "status": "done" },
     { "n": 3, "nome": "Design system", "status": "done" },
     { "n": 4, "nome": "Copy estruturada (2 LPs)", "status": "done" },
-    { "n": 5, "nome": "Front-end (2 LPs)", "status": "pending" },
-    { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "pending" },
-    { "n": 7, "nome": "Tags e módulos LGPD", "status": "pending" },
-    { "n": 8, "nome": "Revisão humana", "status": "pending" },
-    { "n": 9, "nome": "Deploy", "status": "pending" }
+    { "n": 5, "nome": "Front-end (2 LPs)", "status": "done" },
+    { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "done" },
+    { "n": 7, "nome": "Tags e módulos LGPD", "status": "done" },
+    { "n": 8, "nome": "Revisão humana", "status": "blocked" },
+    { "n": 9, "nome": "Deploy", "status": "blocked" }
   ],
   "pendencias": [
     "Hospedagem final não definida (Vercel vs Hostinger/WordPress) — usando HTML estático como default",
-    "GTM/GA4/Meta Pixel/Google Ads IDs não fornecidos — módulos de tag pulados na etapa 7",
-    "Domínio final das 2 LPs não definido",
+    "GTM/GA4/Meta Pixel/Google Ads IDs não fornecidos — módulos de tag pulados (cookie consent já dispara dataLayer, pronto para quando o GTM for instalado)",
+    "Domínio final das 2 LPs não definido — canonical/URLs no HTML usam www.ravobras.com.br como placeholder, atualizar quando o domínio for definido",
     "Discrepância de telefone: copy usa (11) 94701-8958, PDF institucional traz (11) 94791-3486 — cliente precisa confirmar o número oficial",
-    "Marca não tem ícone/monograma dedicado (só wordmark) — favicon será derivado do wordmark, cliente pode querer um ícone próprio no futuro"
+    "Marca não tem ícone/monograma dedicado (só wordmark) — favicon SVG derivado da letra R sobre fundo escuro, cliente pode querer um ícone próprio no futuro",
+    "Sem fotos 'antes' para comparação antes/depois (recomendada pela direcao-estilo.md) — só há fotos do resultado finalizado nas imagens tratadas; avaliar na curadoria de imagens brutas ainda não tratadas",
+    "E-mail de contato oficial não definido — contato@ravobras.com.br usado como placeholder em db-config.php, form-handler.php e política de privacidade",
+    "Backend PHP (form-handler.php/admin.php/db-config.php) instalado mas não configurado — falta host/banco/usuário/senha reais e troca da senha de admin antes do deploy",
+    "3 fotos brutas chegaram corrompidas (0 bytes) do Drive — re-baixar se forem necessárias (ver imagens/tratadas/MANIFESTO.md)"
   ],
   "links": {
     "drive": "https://drive.google.com/drive/folders/1-H2kNE2krNI2BOzBHW-6WSk9Vi2MHPWA",
     "repo": "https://github.com/dev-buildv/rav-site-site",
-    "preview": null,
+    "preview": "http://localhost:8791",
     "dominio": null
   },
   "atualizado_em": "2026-08-10"
