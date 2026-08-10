@@ -1,0 +1,686 @@
+/* ==========================================================================
+   RAV Obras — Landing Pages (Obras Comerciais / Reformas Comerciais)
+   SEGUNDA PROPOSTA DE DESIGN — reconstruída do zero (pedido do cliente,
+   ago/2026: "não aproveite nada do design atual, outra proposta").
+   Referência macro: ot-engenharia (dark-luxo preto+dourado) — ver brief-pack.md §9
+   para a lista completa de padrões de design-bank escolhidos por seção.
+   Tokens de marca (paleta + tipografia) são verdade de marca, não mudam entre
+   propostas: design-system/index.html.
+   Componentes novos usam prefixo rv- (não colide com a rodada anterior).
+   ========================================================================== */
+
+:root{
+  /* ---- Cores de marca (MIV RAV Obras) — inalteradas entre propostas ---- */
+  --color-dark:#18181B;
+  --color-dark-2:#111113;      /* preto mais profundo — footer, glow de CTA */
+  --color-light:#F4F4F5;
+  --color-gold:#B59975;
+  --color-gold-light:#D3C095;
+  --color-white:#FFFFFF;
+
+  --gold-ink:#5E4D3B;          /* dourado seguro (AA) para texto/ícone em fundo claro */
+  --gold-100:#F3E9DA;
+  --gold-50:#FBF7F1;
+
+  --dark-900:#18181B;
+  --dark-800:#202023;
+  --dark-700:#2D2D31;
+  --dark-600:#3F3F46;
+  --dark-500:#52525B;
+  --dark-400:#71717A;
+  --dark-300:#A0A0A6;
+  --dark-200:#C7C7CB;
+  --dark-100:#E3E3E5;
+  --dark-50:#F4F4F5;
+
+  --gradient-gold:linear-gradient(135deg,#D3C095 0%,#B59975 100%);
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.1);
+  --shadow-md:0 6px 20px rgba(0,0,0,.22);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.4);
+
+  --ease-house:cubic-bezier(.16,.84,.28,1);
+  --ease-ui:cubic-bezier(.4,0,.2,1);
+  --t-fast:150ms var(--ease-ui);
+  --t-base:250ms var(--ease-ui);
+  --t-slow:420ms var(--ease-ui);
+
+  /* Tipografia — Montserrat (display/CTA/números) + Inter (corpo/nav/form).
+     Mantida entre propostas — pedido explícito já satisfeito, cliente não
+     reclamou disso na segunda rodada. */
+  --font-display:'Montserrat',sans-serif;
+  --font-body:'Inter',sans-serif;
+
+  /* Raio bem mais fechado que a rodada anterior — de "estúdio arredondado"
+     para "editorial/arquitetônico", quase reto. */
+  --radius:3px;
+  --radius-sm:2px;
+
+  --container:1200px;
+  --header-h:80px;
+  --utility-h:34px;
+}
+
+/* ============ RESET ============ */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+/* utility-bar + header ficam ambos fixed, empilhados (34+80px) — mantido
+   em sincronia com HEADER_OFFSET em js/app.js. */
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto;scroll-padding-top:130px}
+body{
+  font-family:var(--font-body);
+  color:var(--dark-900);
+  background:var(--color-white);
+  line-height:1.6;
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+img,picture,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+input,select,textarea{font-family:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:-.015em;text-wrap:balance}
+p{max-width:74ch}
+html,body{max-width:100%;overflow-x:hidden}
+
+/* ============ ACESSIBILIDADE ============ */
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:999;
+  background:var(--color-gold);color:var(--color-dark);padding:12px 20px;
+  font-family:var(--font-display);font-weight:700;font-size:14px;
+}
+.skip-link:focus{left:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+:root :focus-visible{outline:2.5px solid var(--color-dark);outline-offset:3px}
+[data-theme="dark"] :focus-visible,
+.rv-dark :focus-visible,
+.rv-header :focus-visible,
+.rv-footer :focus-visible,
+.rv-mobile-menu :focus-visible,
+.rv-lightbox :focus-visible,
+.rv-cookie :focus-visible{outline-color:var(--color-gold-light)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+
+/* ============ LAYOUT ============ */
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 24px}
+main{display:block}
+
+/* Seções — a base agora é ESCURA (era clara na proposta anterior); o claro
+   fica reservado a pausas pontuais. */
+.rv-section{padding:120px 0;position:relative}
+.rv-dark{background:var(--color-dark);color:#fff}
+.rv-light{background:var(--color-light);color:var(--dark-900)}
+.rv-dark .rv-lede{color:var(--dark-200)}
+.rv-light .rv-lede{color:var(--dark-500)}
+
+.rv-head{max-width:680px;margin-bottom:64px}
+.rv-head.rv-center{margin-left:auto;margin-right:auto;text-align:center}
+.rv-lede{font-family:var(--font-body);font-size:16.5px}
+
+/* Overline sem badge/pílula — traço dourado + texto solto (troca deliberada
+   do "eyebrow em pílula" usado nas duas rodadas anteriores) */
+.rv-tag{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-display);font-size:12px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--color-gold);
+  margin-bottom:22px;
+}
+.rv-light .rv-tag{color:var(--gold-ink)}
+.rv-head.rv-center .rv-tag{justify-content:center}
+
+.rv-h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin-bottom:18px}
+.rv-cta-row{margin-top:52px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.rv-head.rv-center + .rv-cta-row,
+.rv-cta-row.rv-center{align-items:center;margin-left:auto;margin-right:auto;text-align:center}
+.rv-micro{font-family:var(--font-body);font-size:13.5px;color:var(--dark-400);font-style:italic}
+.rv-dark .rv-micro{color:var(--dark-300)}
+
+/* ============ MOTION: reveal on scroll ============ */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-house),transform .9s var(--ease-house)}
+[data-reveal].is-in{opacity:1;transform:none}
+[data-reveal][data-rv="left"]{transform:translateX(-34px)}
+[data-reveal][data-rv="right"]{transform:translateX(34px)}
+[data-reveal][data-rv="left"].is-in,[data-reveal][data-rv="right"].is-in{transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1 !important;transform:none !important;transition:none !important}
+}
+
+/* ============ BOTÕES ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-weight:600;font-size:14.5px;
+  border-radius:var(--radius-sm);padding:15px 28px;
+  transition:transform var(--t-base),box-shadow var(--t-base),background var(--t-base),color var(--t-base),border-color var(--t-base);
+  min-height:44px;
+}
+.btn svg{width:18px;height:18px;transition:transform var(--t-base)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:scale(.975)}
+.btn-primary{background:var(--gradient-gold);color:var(--color-dark);box-shadow:0 8px 24px rgba(181,153,117,.3)}
+.btn-primary:hover{box-shadow:0 12px 32px rgba(181,153,117,.5);filter:brightness(1.05)}
+.btn-dark{background:var(--color-dark);color:#fff}
+.btn-dark:hover{background:var(--dark-700)}
+.btn-line{position:relative;isolation:isolate;overflow:hidden;background:transparent;color:var(--color-gold-light);border:1.5px solid rgba(181,153,117,.5)}
+.btn-line::before{content:"";position:absolute;inset:0;background:var(--gradient-gold);transform:scaleX(0);transform-origin:left center;transition:transform .4s var(--ease-house);z-index:-1}
+.btn-line:hover{color:var(--color-dark);border-color:var(--color-gold)}
+.btn-line:hover::before{transform:scaleX(1)}
+.btn-sm{padding:11px 20px;font-size:13px;min-height:38px}
+.btn-lg{padding:18px 34px;font-size:15.5px}
+.btn-block{width:100%;justify-content:center}
+
+/* ============ UTILITY BAR — 1 linha, centralizada, sem bloco próprio ==== */
+.rv-utility{
+  position:fixed;top:0;left:0;right:0;z-index:160;
+  background:var(--color-dark-2);color:var(--dark-300);font-size:12px;
+  border-bottom:1px solid rgba(181,153,117,.16);
+}
+.rv-utility-inner{display:flex;align-items:center;justify-content:center;height:var(--utility-h);gap:10px;flex-wrap:wrap}
+.rv-utility a{color:var(--dark-300);font-weight:500;white-space:nowrap;transition:color var(--t-fast)}
+.rv-utility a:hover{color:var(--color-gold-light)}
+.rv-utility a[aria-current="page"]{color:var(--color-gold-light);font-weight:600}
+.rv-utility-sep{color:var(--dark-600)}
+.rv-utility-phone{display:inline-flex;align-items:center;gap:6px}
+.rv-utility-phone svg{width:12px;height:12px}
+
+/* ============ HEADER — transparente sobre o hero, solidifica ao rolar === */
+.rv-header{
+  position:fixed;top:var(--utility-h);left:0;right:0;z-index:150;
+  background:transparent;transition:background var(--t-base),padding var(--t-base),box-shadow var(--t-base);
+  padding:22px 0;
+}
+.rv-header.is-solid{background:rgba(17,17,19,.92);backdrop-filter:blur(10px);padding:14px 0;box-shadow:var(--shadow-md)}
+.rv-header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.rv-logo{flex-shrink:0;display:flex;align-items:center}
+.rv-logo img{height:34px;width:auto;transition:height var(--t-base)}
+.rv-header.is-solid .rv-logo img{height:30px}
+.rv-nav{display:flex;align-items:center;gap:36px;font-size:14px;font-weight:500;color:var(--dark-200)}
+.rv-nav a{position:relative;padding:6px 0;transition:color var(--t-fast)}
+.rv-nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--color-gold);transition:right var(--t-base) var(--ease-house)}
+.rv-nav a:hover{color:#fff}
+.rv-nav a:hover::after,.rv-nav a[aria-current="true"]::after{right:0}
+.rv-nav a[aria-current="true"]{color:#fff;font-weight:600}
+.rv-header-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.rv-header .btn-primary{opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity var(--t-base),transform var(--t-base)}
+.rv-header.is-solid .btn-primary{opacity:1;pointer-events:auto;transform:none}
+.rv-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;align-items:center;border-radius:var(--radius-sm)}
+.rv-toggle span{width:22px;height:1.5px;background:#fff;border-radius:1px;transition:transform var(--t-base),opacity var(--t-base)}
+.rv-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.rv-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.rv-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+@media (max-width:900px){
+  .rv-nav{display:none}
+  .rv-header .btn-primary{display:none}
+}
+
+/* ============ MENU MOBILE / OFF-CANVAS (nav completa vive aqui) ========= */
+.rv-mobile-menu{
+  position:fixed;inset:0;z-index:220;background:var(--color-dark-2);
+  display:none;flex-direction:column;justify-content:center;
+  padding:32px 28px;opacity:0;transition:opacity var(--t-slow);
+}
+.rv-mobile-menu[data-open="true"]{display:flex;opacity:1}
+.rv-mobile-menu-close{position:absolute;top:22px;right:22px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#fff;border-radius:50%}
+.rv-mobile-menu-close:hover{background:rgba(255,255,255,.08)}
+.rv-mobile-menu-close svg{width:22px;height:22px}
+.rv-mobile-menu nav{display:flex;flex-direction:column;gap:4px;margin-bottom:32px;width:100%}
+.rv-mobile-menu nav a{
+  font-family:var(--font-display);color:#fff;font-size:26px;font-weight:700;padding:12px 0;
+  opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease-house),transform .4s var(--ease-house);
+  border-bottom:1px solid rgba(181,153,117,.14);
+}
+.rv-mobile-menu[data-open="true"] nav a{opacity:1;transform:none}
+.rv-mobile-menu nav a:nth-child(1){transition-delay:.06s}
+.rv-mobile-menu nav a:nth-child(2){transition-delay:.11s}
+.rv-mobile-menu nav a:nth-child(3){transition-delay:.16s}
+.rv-mobile-menu nav a:nth-child(4){transition-delay:.21s}
+.rv-mobile-menu nav a:nth-child(5){transition-delay:.26s}
+.rv-menu-lp{font-family:var(--font-body) !important;font-size:15px !important;font-weight:500 !important;color:var(--color-gold-light) !important;border-bottom:none !important}
+.rv-mobile-menu .btn{opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease-house) .3s,transform .4s var(--ease-house) .3s}
+.rv-mobile-menu[data-open="true"] .btn{opacity:1;transform:none}
+@media (min-width:901px){.rv-mobile-menu{display:none !important}}
+
+/* ============ HERO — foto real + overlay + tag vertical de borda ======= */
+.rv-hero{position:relative;color:#fff;overflow:hidden;display:flex;align-items:flex-end;min-height:min(92vh,820px)}
+.rv-hero-media{position:absolute;inset:0;z-index:0}
+.rv-hero-img{width:100%;height:100%;object-fit:cover;object-position:center}
+.rv-hero-overlay{position:absolute;inset:0}
+/* Texto sempre ancorado na base (align-items:flex-end) — a altura real do
+   bloco de texto varia com o conteúdo, então o piso seguro (.88+, ≥8:1
+   mesmo contra pixel de foto branco puro) precisa começar bem antes de
+   qualquer posição plausível do topo do texto (~25-29% da altura do hero
+   nas duas LPs) — só o topo (~12%) fica mais claro para respirar a foto. */
+.rv-hero-overlay{background:linear-gradient(180deg,rgba(17,17,19,.10) 0%,rgba(17,17,19,.50) 12%,rgba(17,17,19,.88) 25%,rgba(17,17,19,.94) 100%)}
+.rv-hero-inner{position:relative;z-index:1;padding:calc(var(--header-h) + var(--utility-h) + 64px) 24px 80px;width:100%}
+.rv-hero-content{max-width:840px}
+.rv-hero-content .rv-tag{color:var(--color-gold-light)}
+.rv-hero h1{font-size:clamp(36px,5.6vw,68px);font-weight:800;letter-spacing:-.02em;margin-bottom:24px;color:#fff}
+.rv-hero-lede{font-family:var(--font-body);font-size:18px;color:var(--dark-100);margin-bottom:36px;max-width:54ch}
+.rv-hero-bullets{margin-bottom:36px;display:flex;flex-direction:column;gap:14px}
+.rv-hero-bullets li{font-family:var(--font-body);display:flex;gap:10px;font-size:16px;color:var(--dark-100);align-items:flex-start}
+.rv-hero-bullets svg{width:19px;height:19px;flex-shrink:0;margin-top:2px;color:var(--color-gold-light)}
+.rv-hero-actions{margin-bottom:20px}
+
+/* Tag vertical rotacionada na borda direita — recurso editorial novo */
+.rv-hero-edge{
+  position:absolute;top:50%;right:18px;transform:translateY(-50%) rotate(90deg);
+  transform-origin:center;white-space:nowrap;z-index:1;
+  font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--dark-100);
+  display:flex;align-items:center;gap:10px;
+}
+.rv-hero-edge::after{content:"";width:36px;height:1px;background:var(--dark-100)}
+@media (max-width:900px){.rv-hero-edge{display:none}}
+
+/* ============ MARQUEE (clientes) ============ */
+.rv-marquee-wrap{overflow:hidden;border-top:1px solid rgba(181,153,117,.18);border-bottom:1px solid rgba(181,153,117,.18)}
+.rv-marquee{display:flex;width:max-content;animation:rv-marquee 34s linear infinite}
+.rv-marquee:hover{animation-play-state:paused}
+.rv-marquee-item{
+  display:flex;align-items:center;gap:28px;padding:22px 0;flex-shrink:0;
+}
+.rv-marquee-item span{
+  font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--dark-300);white-space:nowrap;padding:0 28px;
+}
+.rv-marquee-item svg{width:6px;height:6px;color:var(--color-gold);flex-shrink:0}
+@keyframes rv-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.rv-marquee{animation:none}}
+
+/* ============ GRID NUMERADO ASSIMÉTRICO (Escopo / Por que a RAV) ======== */
+.rv-num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(181,153,117,.18)}
+.rv-light .rv-num-grid{background:rgba(24,24,27,.08)}
+.rv-num-item{background:inherit;padding:40px 36px;position:relative;display:flex;flex-direction:column}
+.rv-dark .rv-num-item{background:var(--color-dark)}
+.rv-light .rv-num-item{background:var(--color-light)}
+.rv-num-item--wide{grid-column:span 2}
+.rv-num-grid .rv-num-item:last-child{grid-column:1/-1}
+.rv-num-grid .rv-num-item:last-child p{max-width:640px}
+.rv-num{
+  font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:.06em;
+  color:var(--color-gold);margin-bottom:20px;
+}
+.rv-light .rv-num{color:var(--gold-ink)}
+.rv-num-item h3{font-size:20px;font-weight:700;margin-bottom:10px}
+/* dark-400/500 medem só 3.7/2.3:1 sobre fundo escuro (abaixo do mínimo de
+   4.5:1 texto normal) — a base assume o pior caso (fundo escuro) e o
+   contexto claro pode usar um tom mais discreto com segurança. */
+.rv-num-item p{font-family:var(--font-body);font-size:14.5px;color:var(--dark-300);max-width:none}
+.rv-light .rv-num-item p{color:var(--dark-500)}
+.rv-num-item-sub{font-family:var(--font-body);font-size:12.5px;color:var(--dark-300);margin-top:10px}
+.rv-light .rv-num-item-sub{color:var(--dark-400)}
+/* traço dourado que abre no hover — em vez de lift genérico */
+.rv-num-item::after{content:"";display:block;width:24px;height:2px;background:var(--color-gold);margin-top:24px;transition:width .35s var(--ease-house)}
+.rv-num-item:hover::after{width:48px}
+
+/* Variante "stroke" (números vazados) para "Por que a RAV" */
+.rv-stroke-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.rv-stroke-item{padding:32px 28px 28px;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.rv-stroke-num{
+  position:absolute;top:16px;left:24px;font-family:var(--font-display);font-weight:800;
+  font-size:64px;line-height:1;color:rgba(181,153,117,.34);z-index:0;
+}
+@supports (-webkit-text-stroke:1px black){
+  .rv-stroke-num{color:transparent;-webkit-text-stroke:1.5px rgba(211,192,149,.6)}
+}
+.rv-stroke-item::before{content:"";display:block;position:relative;z-index:1;width:24px;height:2px;background:var(--color-gold);margin-bottom:14px;order:-1}
+.rv-stroke-item p{position:relative;z-index:1;font-family:var(--font-display);font-size:16px;font-weight:600;color:#fff;max-width:none}
+
+@media (max-width:900px){
+  .rv-num-grid,.rv-stroke-grid{grid-template-columns:repeat(2,1fr)}
+  .rv-num-item--wide{grid-column:span 2}
+}
+@media (max-width:560px){
+  .rv-num-grid,.rv-stroke-grid{grid-template-columns:1fr}
+  .rv-num-item--wide{grid-column:span 1}
+  .rv-num-item{padding:32px 24px}
+}
+
+/* ============ ÍNDICE EDITORIAL (Onde atuamos / reformamos) ============= */
+.rv-index-list{border-top:1px solid rgba(181,153,117,.2)}
+.rv-index-item{
+  display:flex;align-items:baseline;gap:24px;padding:22px 0;
+  border-bottom:1px solid rgba(181,153,117,.2);position:relative;
+}
+.rv-index-item-num{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--color-gold);width:36px;flex-shrink:0}
+.rv-light .rv-index-item-num{color:var(--gold-ink)}
+.rv-index-item-label{
+  font-family:var(--font-display);font-size:clamp(18px,2.6vw,26px);font-weight:600;
+  flex:1;transition:color var(--t-fast);
+}
+.rv-index-item::after{
+  content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--color-gold);
+  transition:width .4s var(--ease-house);
+}
+.rv-index-item:hover::after{width:100%}
+.rv-index-item:hover .rv-index-item-label{color:var(--color-gold-light)}
+.rv-light .rv-index-item:hover .rv-index-item-label{color:var(--gold-ink)}
+
+/* ============ CONTRASTE EDITORIAL (A diferença RAV) ======================
+   Marcado como <table role="table"> de verdade (2 células por linha) para
+   leitor de tela; o "divisor" central é só a border-right da 1ª célula, não
+   uma 3ª célula decorativa — evita contagem de coluna estranha em AT. */
+.rv-contrast{width:100%;border-collapse:collapse}
+.rv-contrast-headrow th{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding-bottom:20px;text-align:left}
+.rv-contrast-headrow th:first-child{color:var(--dark-300);border-right:1px solid rgba(181,153,117,.3);padding-right:28px}
+.rv-contrast-headrow th:last-child{color:var(--color-gold-light);padding-left:28px}
+.rv-contrast-row td{
+  padding:28px 0;vertical-align:top;border-top:1px solid rgba(181,153,117,.18);
+}
+.rv-contrast-row:last-child td{border-bottom:1px solid rgba(181,153,117,.18)}
+.rv-contrast-num{
+  font-family:var(--font-display);font-weight:800;font-size:14px;color:var(--color-gold);
+  margin-bottom:8px;display:block;
+}
+/* dark-400 sozinho mede 3.7:1 sobre fundo escuro (abaixo de 4.5:1 texto
+   normal) — dark-300 garante ~6.8-7.2:1 no mesmo tom "apagado" pretendido */
+.rv-contrast-old{font-family:var(--font-body);font-size:15.5px;color:var(--dark-300);width:50%;border-right:1px solid rgba(181,153,117,.3);padding-right:28px}
+.rv-contrast-new{font-family:var(--font-display);font-size:17px;font-weight:600;color:#fff;width:50%;padding-left:28px}
+.rv-contrast-new-inner{display:flex;gap:10px;align-items:flex-start}
+.rv-contrast-new svg{width:18px;height:18px;color:var(--color-gold-light);flex-shrink:0;margin-top:3px}
+
+@media (max-width:700px){
+  .rv-contrast,.rv-contrast thead,.rv-contrast tbody,.rv-contrast tr,.rv-contrast th,.rv-contrast td{display:block;width:100%}
+  /* especificidade (.rv-contrast tr = 1 classe+1 elemento) empatava/vencia
+     de ".rv-contrast-headrow" sozinho (1 classe) e o width:100% vazava a
+     linha por baixo do clip — precisa de 2 classes para ganhar. */
+  .rv-contrast .rv-contrast-headrow{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .rv-contrast-row{border:1px solid rgba(181,153,117,.22);margin-bottom:16px;padding:22px 18px}
+  .rv-contrast-row:last-child{margin-bottom:0}
+  .rv-contrast-row td{border:none !important;padding:0;width:100%}
+  .rv-contrast-old{border-right:none;padding-right:0;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(181,153,117,.18)}
+  .rv-contrast-new{padding-left:0}
+  .rv-contrast-old::before{content:"Comum no mercado";display:block;font-family:var(--font-display);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark-300);margin-bottom:8px}
+  .rv-contrast-new::before{content:"Com a RAV";display:block;font-family:var(--font-display);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-gold-light);margin-bottom:8px}
+}
+
+/* ============ CITAÇÃO FULL-BLEED (depoimento) =========================== */
+#confianca{padding-top:84px}
+.rv-quote{max-width:720px;margin:0 auto;text-align:center;position:relative}
+.rv-quote-mark{font-family:var(--font-display);font-size:44px;font-weight:800;color:var(--color-gold);line-height:1;margin-bottom:4px;display:block}
+.rv-quote p{
+  font-family:var(--font-display);font-weight:600;font-size:clamp(18px,2.2vw,24px);
+  line-height:1.4;color:#fff;margin:0 auto 20px;max-width:none;letter-spacing:-.01em;
+}
+.rv-quote footer{display:flex;flex-direction:column;align-items:center;gap:4px}
+.rv-quote cite{font-family:var(--font-body);font-weight:600;font-style:normal;font-size:15px;color:var(--color-gold-light)}
+.rv-quote footer span{font-family:var(--font-body);font-size:13.5px;color:var(--dark-300)}
+
+/* ============ TIMELINE VERTICAL (Sobre a RAV) — ano como coluna própria = */
+.rv-timeline{display:flex;flex-direction:column}
+.rv-timeline-row{
+  display:grid;grid-template-columns:160px 1fr;gap:32px;
+  padding:36px 0;border-top:1px solid rgba(181,153,117,.25);align-items:flex-start;
+}
+.rv-timeline-row:last-child{border-bottom:1px solid rgba(181,153,117,.25)}
+/* O ano é conteúdo real (não decorativo), então precisa de 3:1 (é "texto
+   grande" ≥24px) mesmo no tom "apagado" pretendido — dourado puro translúcido
+   sobre fundo claro mede só ~2:1 mesmo a 100% de opacidade (o dourado da marca
+   é escuro demais para "clarear" mas claro demais para escurecer sobre fundo
+   claro); a solução é usar --gold-ink (o dourado já escurecido p/ AA) a 70%. */
+.rv-timeline-year{
+  font-family:var(--font-display);font-weight:800;font-size:clamp(34px,4.4vw,52px);
+  line-height:1;color:rgba(94,77,59,.7);
+}
+.rv-timeline-body h3{font-size:19px;font-weight:700;margin-bottom:8px;color:var(--color-dark)}
+.rv-timeline-body p{font-family:var(--font-body);font-size:15px;color:var(--dark-500)}
+@media (max-width:640px){
+  .rv-timeline-row{grid-template-columns:1fr;gap:8px}
+  .rv-timeline-year{font-size:32px}
+}
+
+/* ============ GRID DE CASOS / PORTFÓLIO — legenda editorial abaixo ====== */
+.rv-case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px}
+.rv-case{cursor:zoom-in}
+.rv-case-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--dark-800);margin-bottom:16px}
+.rv-case-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-house)}
+.rv-case:hover .rv-case-media img,.rv-case:focus-visible .rv-case-media img{transform:scale(1.05)}
+.rv-case-badge{
+  position:absolute;top:14px;left:14px;font-family:var(--font-display);font-size:10.5px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--color-dark);background:var(--color-gold-light);
+  padding:5px 12px;
+}
+.rv-case-media::after{content:"";position:absolute;inset:0;border:1px solid rgba(181,153,117,.22);transition:border-color var(--t-base)}
+.rv-case:hover .rv-case-media::after,.rv-case:focus-visible .rv-case-media::after{border-color:rgba(211,192,149,.85)}
+.rv-case-meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--font-body);font-size:12.5px;color:var(--dark-300);margin-bottom:6px}
+.rv-case-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:#fff}
+
+/* Grid par (6 casos, 3/linha) — sem card órfão nem span assimétrico */
+@media (max-width:900px){
+  .rv-case-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .rv-case-grid{grid-template-columns:1fr}
+}
+
+/* ============ LIGHTBOX (contrato preservado — requisito obrigatório) ==== */
+.rv-lightbox{
+  position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,56px);background:rgba(10,10,11,.95);opacity:0;transition:opacity .3s ease;
+}
+.rv-lightbox[data-open="true"]{display:flex}
+.rv-lightbox.is-visible{opacity:1}
+.rv-lightbox img{
+  max-width:100%;max-height:100%;object-fit:contain;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.85);transform:scale(.94);
+  transition:transform .32s var(--ease-house),opacity .2s ease;user-select:none;
+}
+.rv-lightbox.is-visible img{transform:scale(1)}
+.rv-lb-btn{
+  position:absolute;display:flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:50%;background:rgba(244,244,245,.08);
+  border:1px solid rgba(244,244,245,.22);color:#F4F4F5;transition:background var(--t-fast),transform var(--t-fast);
+}
+.rv-lb-btn:hover{background:rgba(244,244,245,.2)}
+.rv-lb-btn svg{width:22px;height:22px}
+.rv-lb-close{top:clamp(14px,3vw,26px);right:clamp(14px,3vw,26px)}
+.rv-lb-close:hover{transform:rotate(90deg)}
+.rv-lb-prev{left:clamp(8px,3vw,28px);top:50%;margin-top:-24px}
+.rv-lb-next{right:clamp(8px,3vw,28px);top:50%;margin-top:-24px}
+.rv-lb-count{
+  position:absolute;left:50%;bottom:clamp(14px,3vw,26px);transform:translateX(-50%);
+  font-family:var(--font-display);color:#E9E6DF;font-size:13px;font-weight:600;letter-spacing:.04em;
+  background:rgba(17,17,19,.6);border:1px solid rgba(244,244,245,.14);padding:7px 16px;
+}
+.rv-lightbox[data-single="true"] .rv-lb-prev,.rv-lightbox[data-single="true"] .rv-lb-next,.rv-lightbox[data-single="true"] .rv-lb-count{display:none}
+@media (max-width:600px){.rv-lb-prev,.rv-lb-next{width:40px;height:40px;margin-top:-20px}.rv-lb-btn svg{width:18px;height:18px}}
+
+/* ============ FAQ ASSIMÉTRICO (título na lateral) ======================= */
+.rv-faq-layout{display:grid;grid-template-columns:.9fr 1.6fr;gap:64px;align-items:start}
+.rv-faq-side{display:flex;flex-direction:column}
+.rv-faq-list{border-top:1px solid rgba(24,24,27,.12)}
+.rv-faq-item{border-bottom:1px solid rgba(24,24,27,.12)}
+.rv-faq-q{
+  width:100%;display:flex;align-items:center;gap:20px;padding:22px 4px;
+  text-align:left;font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--color-dark);
+  transition:color var(--t-fast);
+}
+.rv-faq-q:hover{color:var(--gold-ink)}
+.rv-faq-q-num{font-family:var(--font-display);color:var(--gold-ink);font-weight:700;font-size:13px;flex-shrink:0;width:26px}
+.rv-faq-q-text{flex:1}
+.rv-faq-q-icon{width:20px;height:20px;flex-shrink:0;color:var(--gold-ink);transition:transform var(--t-base)}
+.rv-faq-item[data-open="true"] .rv-faq-q-icon{transform:rotate(45deg)}
+.rv-faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease-house)}
+.rv-faq-a p{font-family:var(--font-body);padding:0 4px 24px 46px;color:var(--dark-500);font-size:15px;max-width:62ch}
+@media (max-width:800px){.rv-faq-layout{grid-template-columns:1fr;gap:32px}}
+
+/* ============ CTA FINAL — passos horizontais + glow radial ============== */
+.rv-cta-glow{position:relative;overflow:hidden}
+.rv-cta-glow::before{
+  content:"";position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:900px;height:900px;border-radius:50%;
+  background:radial-gradient(circle,rgba(181,153,117,.22) 0%,rgba(181,153,117,0) 68%);
+  pointer-events:none;
+}
+.rv-steps-row{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:24px}
+.rv-steps-track{position:absolute;top:22px;left:8%;right:8%;height:1px;background:rgba(181,153,117,.25);z-index:0}
+.rv-step{position:relative;z-index:1;text-align:center;padding:0 16px;opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-house),transform .6s var(--ease-house)}
+.rv-steps-row.is-in .rv-step{opacity:1;transform:none}
+.rv-steps-row.is-in .rv-step:nth-child(1){transition-delay:.1s}
+.rv-steps-row.is-in .rv-step:nth-child(2){transition-delay:.3s}
+.rv-steps-row.is-in .rv-step:nth-child(3){transition-delay:.5s}
+.rv-step-dot{
+  width:44px;height:44px;border-radius:50%;background:var(--dark-800);border:2px solid var(--dark-600);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--dark-300);
+  margin:0 auto 22px;transition:background var(--t-base),border-color var(--t-base),color var(--t-base);
+}
+.rv-steps-row.is-in .rv-step-dot{background:var(--gradient-gold);border-color:transparent;color:var(--color-dark)}
+.rv-step h3{font-size:17px;font-weight:700;margin-bottom:8px;color:#fff}
+.rv-step p{font-family:var(--font-body);font-size:14px;color:var(--dark-300)}
+.rv-cta-actions{margin-top:56px;text-align:center;position:relative;z-index:1}
+.rv-cta-actions .btn{margin-bottom:12px}
+.rv-cta-actions p{font-family:var(--font-body);color:var(--dark-300);font-size:13.5px;font-style:italic}
+@media (max-width:700px){
+  .rv-steps-row{grid-template-columns:1fr;gap:36px}
+  .rv-steps-track{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv-step{opacity:1 !important;transform:none !important}
+}
+
+/* ============ FAIXA DE CTA EM DOURADO SÓLIDO (novo — antes do footer) === */
+.rv-strip-gold{background:var(--gradient-gold);color:var(--color-dark)}
+.rv-strip-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:36px 0}
+.rv-strip-inner h3{font-size:clamp(19px,2.4vw,26px);font-weight:800;color:var(--color-dark)}
+.rv-strip-inner .btn-dark{flex-shrink:0}
+
+/* ============ FOOTER — colunas densas, coluna própria de área de atendimento */
+.rv-footer{background:var(--color-dark-2);color:var(--dark-300)}
+.rv-footer-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:40px;padding:88px 24px 56px}
+.rv-footer-brand img{height:32px;margin-bottom:20px}
+.rv-footer-brand p{font-family:var(--font-body);font-size:13.5px;color:var(--dark-300);margin-bottom:24px;max-width:32ch;line-height:1.6}
+.rv-footer-title{font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--dark-300);margin-bottom:18px;font-weight:700}
+.rv-footer-col{display:flex;flex-direction:column;gap:11px;font-family:var(--font-body);font-size:13.5px}
+.rv-footer-col a,.rv-footer-col span,.rv-footer-col .link-btn{color:var(--dark-300);transition:color var(--t-fast);text-align:left}
+.rv-footer-col a:hover,.rv-footer-col .link-btn:hover{color:var(--color-gold-light)}
+.rv-footer-bottom{border-top:1px solid rgba(181,153,117,.14)}
+.rv-footer-bottom-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:22px 24px;font-family:var(--font-body);font-size:12px;color:var(--dark-300)}
+
+@media (max-width:900px){
+  .rv-footer-inner{grid-template-columns:1fr 1fr;gap:36px 24px}
+  .rv-footer-brand{grid-column:1/-1}
+}
+@media (max-width:560px){
+  .rv-footer-inner{grid-template-columns:1fr;padding:64px 24px 40px}
+  .rv-strip-inner{flex-direction:column;align-items:flex-start;text-align:left}
+}
+
+/* ============ RESPONSIVO GERAL DE SEÇÃO ============ */
+@media (max-width:900px){
+  .rv-section{padding:88px 0}
+  .rv-head{margin-bottom:48px}
+}
+@media (max-width:560px){
+  .rv-section{padding:64px 0}
+  .rv-h2{font-size:28px}
+}
+
+/* ============ LINK-BOTÃO (footer, abre modais) ============ */
+.link-btn{background:none;border:none;padding:0;margin:0;font-family:inherit;font-size:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+
+/* ==========================================================================
+   POLÍTICA DE PRIVACIDADE + COOKIE NOTICE — módulo BuildV (LGPD)
+   Contrato de IDs/classes usado pelo app.js preservado; visual reconstruído.
+   ========================================================================== */
+.rv-privacy-overlay{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(10,10,11,.78);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity var(--t-base);
+}
+.rv-privacy-overlay.open{opacity:1;pointer-events:all}
+.rv-privacy-modal{
+  background:var(--color-white);border-radius:var(--radius);
+  width:100%;max-width:640px;max-height:86vh;
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow-lg);
+  transform:translateY(20px);transition:transform var(--t-slow) var(--ease-house);
+}
+.rv-privacy-overlay.open .rv-privacy-modal{transform:translateY(0)}
+.rv-privacy-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 26px;border-bottom:1px solid var(--dark-100);flex-shrink:0;
+}
+.rv-privacy-header h2{font-size:17px;font-weight:700;color:var(--color-dark)}
+.rv-privacy-close{background:none;border:none;cursor:pointer;font-size:22px;line-height:1;color:var(--dark-400);padding:4px}
+.rv-privacy-close:hover{color:var(--color-dark)}
+.rv-privacy-body{overflow-y:auto;padding:26px;font-family:var(--font-body);font-size:13.5px;line-height:1.78;color:var(--dark-600)}
+.rv-privacy-body h3{font-family:var(--font-display);font-size:13.5px;font-weight:700;color:var(--color-dark);margin:20px 0 6px}
+.rv-privacy-body h3:first-child{margin-top:0}
+.rv-privacy-body p,.rv-privacy-body ul{margin-bottom:12px}
+.rv-privacy-body ul{padding-left:18px}
+.rv-privacy-body a{color:var(--gold-ink);text-decoration:underline}
+
+.rv-cookie{
+  position:fixed;bottom:20px;left:20px;z-index:700;
+  background:var(--color-dark-2);border:1px solid rgba(181,153,117,.22);
+  border-radius:var(--radius);padding:22px 24px;
+  width:auto;max-width:400px;display:flex;flex-direction:column;gap:14px;
+  box-shadow:var(--shadow-lg);
+  transform:translateY(calc(100% + 24px));transition:transform var(--t-slow) var(--ease-house);
+}
+.rv-cookie.show{transform:translateY(0)}
+.rv-cookie p{font-family:var(--font-body);font-size:13px;color:var(--dark-300);line-height:1.6;margin:0}
+.rv-cookie p .link-btn{color:var(--color-gold-light)}
+.rv-cookie-actions{display:flex;gap:10px}
+.rv-cookie-btn{
+  flex:1;padding:11px 14px;border-radius:var(--radius-sm);
+  font-family:var(--font-display);font-size:12.5px;font-weight:600;cursor:pointer;
+  white-space:nowrap;text-align:center;transition:opacity var(--t-fast),background var(--t-fast);
+}
+.rv-cookie-btn--accept{background:var(--color-gold);color:var(--color-dark);border:none}
+.rv-cookie-btn--accept:hover{opacity:.88}
+.rv-cookie-btn--decline{background:transparent;color:var(--dark-300);border:1px solid var(--dark-600)}
+.rv-cookie-btn--decline:hover{color:var(--dark-100);border-color:var(--dark-400)}
+@media (max-width:480px){
+  .rv-cookie{left:12px;right:12px;bottom:12px;max-width:none;width:auto}
+  .rv-cookie-actions{flex-direction:column}
+}
+
+/* ==========================================================================
+   PÁGINAS STANDALONE — Fornecedores / Trabalhe Conosco
+   ========================================================================== */
+/* Fornecedores/Trabalhe conosco têm nav própria simples (logo centralizado,
+   em fluxo normal) em vez do header fixo transparente — não precisam de
+   padding de compensação. */
+.rv-standalone{min-height:100vh;display:flex;flex-direction:column;background:var(--color-dark)}
+.rv-standalone-nav{background:var(--color-dark-2);border-bottom:1px solid rgba(181,153,117,.16);padding:20px 24px;display:flex;align-items:center;justify-content:center}
+.rv-standalone-nav img{height:32px;width:auto}
+.rv-standalone-main{flex:1;display:flex;flex-direction:column;align-items:center;padding:clamp(56px,9vw,100px) 24px}
+.rv-standalone-head{text-align:center;max-width:480px;margin:0 auto 44px}
+.rv-standalone-head h1{font-size:clamp(26px,3vw + 4px,36px);margin-bottom:14px;color:#fff}
+.rv-standalone-head p{font-family:var(--font-body);color:var(--dark-300);font-size:15.5px;line-height:1.65}
+
+.rv-form-card{background:var(--color-white);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:clamp(30px,4vw,44px);width:100%;max-width:560px}
+.rv-form-grid{display:flex;flex-direction:column;gap:18px}
+.rv-form-group{display:flex;flex-direction:column;gap:6px}
+.rv-form-group label{font-family:var(--font-body);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--dark-500)}
+.rv-form-group input,.rv-form-group select{
+  padding:13px 14px;border:1px solid var(--dark-100);border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:15px;color:var(--color-dark);background:var(--color-white);
+  transition:border-color var(--t-fast);width:100%;
+}
+.rv-form-group input:focus,.rv-form-group select:focus{outline:none;border-color:var(--color-gold)}
+.rv-form-group .file-label{
+  display:flex;align-items:center;gap:10px;padding:13px 14px;
+  border:1px dashed var(--dark-200);border-radius:var(--radius-sm);
+  background:var(--color-light);cursor:pointer;font-family:var(--font-body);font-size:14px;color:var(--dark-500);
+  transition:border-color var(--t-fast);
+}
+.rv-form-group .file-label:hover{border-color:var(--color-gold)}
+.rv-form-group input[type="file"]{display:none}
+.rv-file-name{font-family:var(--font-body);font-size:12.5px;color:var(--dark-400)}
+.rv-file-icon{width:16px;height:16px;flex-shrink:0;color:var(--dark-400)}
+.rv-form-submit{width:100%;justify-content:center;margin-top:4px}
+.rv-form-feedback{font-family:var(--font-body);padding:12px 16px;border-radius:var(--radius-sm);font-size:13.5px;display:none}
+.rv-form-feedback.success{background:#f0faf4;border:1px solid #a3d9b1;color:#1a6b35}
+.rv-form-feedback.error{background:#fdf2f2;border:1px solid #e8b4b4;color:#8a2020}
+
+.rv-standalone-footer{font-family:var(--font-body);text-align:center;padding:32px 24px;font-size:12.5px;color:var(--dark-300);border-top:1px solid rgba(181,153,117,.14)}
+.rv-standalone-footer a{color:var(--color-gold-light);text-decoration:underline}
+@media (max-width:560px){.rv-form-card{padding:26px 20px}}

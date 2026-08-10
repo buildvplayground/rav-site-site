@@ -3,7 +3,7 @@
   "slug": "rav-site",
   "segmento": "Construção civil — obras e reformas comerciais/corporativas (B2B)",
   "escopo": "2 landing pages independentes: Obras Comerciais (turnkey) e Reformas Comerciais (drywall/pisos)",
-  "etapa_atual": 8,
+  "etapa_atual": 9,
   "etapas": [
     { "n": 1, "nome": "Extração do Drive", "status": "done" },
     { "n": 2, "nome": "Scaffold do projeto + logo extraída do MIV", "status": "done" },
@@ -13,24 +13,25 @@
     { "n": 5, "nome": "Front-end (2 LPs)", "status": "done" },
     { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "done" },
     { "n": 7, "nome": "Tags e módulos LGPD", "status": "done" },
-    { "n": 8, "nome": "Revisão humana", "status": "blocked", "nota": "2 revisões de design aplicadas durante a etapa 8: (1) \"Premium+\" — tipografia Montserrat+Inter em todo o site (LPs + fornecedores/trabalhe-conosco + admin.php), ver brief-pack.md §8; (2) cliente rejeitou a direção visual e pediu outra proposta (\"não aproveite nada do design atual\") — redesign completo v2 com nova referência macro (ot-engenharia), novos padrões de design-bank por seção e predominância clara/escura invertida, mantendo paleta/tipografia/copy/imagens/requisitos funcionais, ver brief-pack.md §9. Aguardando novo aprovar do usuário." },
-    { "n": 9, "nome": "Deploy", "status": "blocked" }
+    { "n": 8, "nome": "Revisão humana", "status": "done", "nota": "2 rodadas de redesign (Premium+ com Montserrat/Inter, depois v2 com nova referência macro ot-engenharia) + ajustes finos de proporção/WCAG em 4 seções. Cliente aprovou: \"o design ficou bom agora\". Projeto reorganizado em deploy-obras/ e deploy-reformas/ (pastas independentes por LP)." },
+    { "n": 9, "nome": "Deploy", "status": "blocked", "nota": "Pastas de deploy prontas (deploy-obras/, deploy-reformas/); falta hospedagem, domínio, secrets FTP/DB e confirmação da topologia de URL entre as 2 LPs (ver pendencias)." }
   ],
   "pendencias": [
-    "Hospedagem final não definida (Vercel vs Hostinger/WordPress) — usando HTML estático como default",
+    "Hospedagem final não definida (Vercel vs Hostinger/WordPress) — usando HTML estático + deploy-obras//deploy-reformas/ como pastas-irmãs como default",
+    "Topologia de URL assumida entre as 2 LPs: deploy-obras/ = raiz do domínio, deploy-reformas/ renomeada para 'reformas/' como subpasta irmã — os links internos (../reformas/, ../obras/) dependem dessa renomeação no upload; se a hospedagem final for outra (subdomínios, domínios separados), reajustar os links antes do deploy",
     "GTM/GA4/Meta Pixel/Google Ads IDs não fornecidos — módulos de tag pulados (cookie consent já dispara dataLayer, pronto para quando o GTM for instalado)",
-    "Domínio final das 2 LPs não definido — canonical/URLs no HTML usam www.ravobras.com.br como placeholder, atualizar quando o domínio for definido",
+    "Domínio final das 2 LPs não definido — canonical/URLs no HTML usam www.ravobras.com.br (Obras) e www.ravobras.com.br/reformas/ (Reformas) como placeholder, atualizar quando o domínio for definido",
     "Discrepância de telefone: copy usa (11) 94701-8958, PDF institucional traz (11) 94791-3486 — cliente precisa confirmar o número oficial",
     "Marca não tem ícone/monograma dedicado (só wordmark) — favicon SVG derivado da letra R sobre fundo escuro, cliente pode querer um ícone próprio no futuro",
     "Sem fotos 'antes' para comparação antes/depois (recomendada pela direcao-estilo.md) — só há fotos do resultado finalizado nas imagens tratadas; avaliar na curadoria de imagens brutas ainda não tratadas",
     "E-mail de contato oficial não definido — contato@ravobras.com.br usado como placeholder em db-config.php, form-handler.php e política de privacidade",
-    "Backend PHP (form-handler.php/admin.php/db-config.php) instalado mas não configurado — falta host/banco/usuário/senha reais e troca da senha de admin antes do deploy",
+    "Backend PHP (form-handler.php/admin.php/db-config.example.php) instalado em cada pasta de deploy mas não configurado — falta host/banco/usuário/senha reais (2x, uma por LP, ou banco compartilhado com prefixos rav_obras_*) e troca da senha de admin antes do deploy",
     "3 fotos brutas chegaram corrompidas (0 bytes) do Drive — re-baixar se forem necessárias (ver imagens/tratadas/MANIFESTO.md)"
   ],
   "links": {
     "drive": "https://drive.google.com/drive/folders/1-H2kNE2krNI2BOzBHW-6WSk9Vi2MHPWA",
     "repo": "https://github.com/dev-buildv/rav-site-site",
-    "preview": "http://localhost:8791",
+    "preview": "http://localhost:8793/deploy-obras/index.html e http://localhost:8793/deploy-reformas/index.html",
     "dominio": null
   },
   "atualizado_em": "2026-08-10"

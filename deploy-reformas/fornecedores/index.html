@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seja um Fornecedor — RAV Obras</title>
+<meta name="description" content="Cadastre sua empresa, produto ou serviço e torne-se um fornecedor da RAV Obras.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="rv-standalone">
+
+<nav class="rv-standalone-nav">
+  <a href="../index.html" aria-label="RAV Obras — página inicial">
+    <img src="../assets/img/logos/logo-white.png" alt="RAV Obras" width="120" height="46">
+  </a>
+</nav>
+
+<main class="rv-standalone-main" id="main">
+  <header class="rv-standalone-head">
+    <span class="rv-tag" style="justify-content:center">Parceiros &amp; Fornecedores</span>
+    <h1>Seja um fornecedor da RAV Obras</h1>
+    <p>Cadastre sua empresa, produto ou serviço. Nossa equipe avalia a parceria e entra em contato.</p>
+  </header>
+
+  <div class="rv-form-card">
+    <form id="formFornecedor" class="rv-form-grid" enctype="multipart/form-data" novalidate>
+      <input type="hidden" name="form_type" value="fornecedor">
+
+      <div class="rv-form-group">
+        <label for="f-produto">Produto ou serviço oferecido</label>
+        <input type="text" id="f-produto" name="produto" placeholder="Ex: Materiais elétricos, locação de equipamentos…" required>
+      </div>
+
+      <div class="rv-form-group">
+        <label for="f-nome">Nome do responsável</label>
+        <input type="text" id="f-nome" name="nome" placeholder="Seu nome completo" required>
+      </div>
+
+      <div class="rv-form-group">
+        <label for="f-empresa">Nome da empresa</label>
+        <input type="text" id="f-empresa" name="empresa" placeholder="Razão social ou nome fantasia" required>
+      </div>
+
+      <div class="rv-form-group">
+        <label for="f-email">E-mail</label>
+        <input type="email" id="f-email" name="email" placeholder="contato@suaempresa.com" required>
+      </div>
+
+      <div class="rv-form-group">
+        <label for="f-tel">Telefone / WhatsApp</label>
+        <input type="tel" id="f-tel" name="telefone" placeholder="(11) 90000-0000" required>
+      </div>
+
+      <div class="rv-form-group">
+        <label for="f-arquivo">Proposta ou apresentação (opcional)</label>
+        <label class="file-label" for="f-arquivo">
+          <svg class="rv-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          <span>Anexar arquivo</span>
+          <span class="rv-file-name" id="f-file-name">PDF, DOC ou DOCX · máx. 5 MB</span>
+        </label>
+        <input type="file" id="f-arquivo" name="arquivo" accept=".pdf,.doc,.docx">
+      </div>
+
+      <div class="rv-form-feedback" id="f-feedback" role="alert"></div>
+      <button type="submit" class="btn btn-primary rv-form-submit" id="f-submit">Enviar cadastro</button>
+    </form>
+  </div>
+</main>
+
+<footer class="rv-standalone-footer">
+  <p>Rav Obras Ltda &copy; <span data-year></span> &nbsp;·&nbsp; <a href="../index.html">Voltar ao site</a> &nbsp;·&nbsp; <button type="button" class="link-btn" data-modal="privacyOverlay">Política de Privacidade</button> &nbsp;·&nbsp; <a href="../trabalhe-conosco/">Trabalhe Conosco</a></p>
+</footer>
+
+<!-- MODAL: POLÍTICA DE PRIVACIDADE -->
+<div class="rv-privacy-overlay" id="privacyOverlay" role="dialog" aria-modal="true" aria-label="Política de Privacidade">
+  <div class="rv-privacy-modal">
+    <div class="rv-privacy-header">
+      <h2>Política de Privacidade</h2>
+      <button class="rv-privacy-close" id="privacyClose" aria-label="Fechar">&#x2715;</button>
+    </div>
+    <div class="rv-privacy-body">
+      <p>A <strong>RAV Obras</strong> (Rav Obras Ltda) respeita a sua privacidade e está comprometida com a proteção dos seus dados pessoais, em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018)</strong>.</p>
+      <h3>1. Dados coletados</h3>
+      <p>Coletamos apenas os dados fornecidos voluntariamente por você neste formulário: nome, empresa, e-mail, telefone e eventual arquivo anexado (proposta ou apresentação).</p>
+      <h3>2. Finalidade</h3>
+      <ul>
+        <li>Avaliar seu cadastro como fornecedor ou parceiro</li>
+        <li>Enviar comunicações relacionadas ao contato realizado</li>
+        <li>Cumprir obrigações legais</li>
+      </ul>
+      <h3>3. Compartilhamento</h3>
+      <p>Seus dados não são vendidos nem compartilhados com terceiros, exceto quando exigido por lei.</p>
+      <h3>4. Armazenamento e segurança</h3>
+      <p>Os dados ficam armazenados em banco de dados seguro com acesso restrito. Arquivos enviados são armazenados em servidor protegido contra execução de código.</p>
+      <h3>5. Seus direitos (LGPD)</h3>
+      <ul>
+        <li>Confirmar a existência de tratamento dos seus dados</li>
+        <li>Acessar, corrigir ou excluir seus dados</li>
+        <li>Revogar o consentimento a qualquer momento</li>
+      </ul>
+      <p>Para exercer seus direitos, entre em contato: <strong>contato@ravobras.com.br</strong></p>
+      <h3>6. Cookies</h3>
+      <p>Utilizamos cookies estritamente necessários para o funcionamento do site e, com seu consentimento, cookies de análise de tráfego.</p>
+      <h3>7. Contato</h3>
+      <p>
+        <strong>Rav Obras Ltda</strong><br>
+        contato@ravobras.com.br<br>
+        São Paulo, SP
+      </p>
+      <p style="color:var(--dark-500);font-size:11px;margin-top:24px">Última atualização: agosto de 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE NOTICE -->
+<div class="rv-cookie" id="cookieNotice">
+  <p>Utilizamos cookies essenciais e, com seu consentimento, cookies analíticos para melhorar sua experiência. Consulte nossa <button type="button" class="link-btn" data-modal="privacyOverlay">Política de Privacidade</button>.</p>
+  <div class="rv-cookie-actions">
+    <button type="button" class="rv-cookie-btn rv-cookie-btn--decline" id="cookieDecline">Recusar não essenciais</button>
+    <button type="button" class="rv-cookie-btn rv-cookie-btn--accept" id="cookieAccept">Aceitar cookies</button>
+  </div>
+</div>
+
+<script src="../js/app.js"></script>
+<script>
+(function () {
+  var fileInput = document.getElementById('f-arquivo');
+  var fileName = document.getElementById('f-file-name');
+  if (fileInput) fileInput.addEventListener('change', function () {
+    fileName.textContent = this.files[0] ? this.files[0].name : 'PDF, DOC ou DOCX · máx. 5 MB';
+  });
+
+  var form = document.getElementById('formFornecedor');
+  var btn = document.getElementById('f-submit');
+  var feedback = document.getElementById('f-feedback');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+    feedback.style.display = 'none';
+
+    fetch('../form-handler.php', { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success) {
+          feedback.className = 'rv-form-feedback success';
+          feedback.textContent = 'Cadastro enviado! Entraremos em contato em breve.';
+          feedback.style.display = 'block';
+          form.reset();
+          if (fileName) fileName.textContent = 'PDF, DOC ou DOCX · máx. 5 MB';
+        } else {
+          throw new Error(data.message || 'Erro ao enviar. Tente novamente.');
+        }
+      })
+      .catch(function (err) {
+        feedback.className = 'rv-form-feedback error';
+        feedback.textContent = err.message;
+        feedback.style.display = 'block';
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = original;
+      });
+  });
+})();
+</script>
+</body>
+</html>

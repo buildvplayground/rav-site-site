@@ -26,13 +26,26 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
 - **Logotipo:** wordmark "RAV" (R em cinza/prata + AV em dourado sobre fundo escuro; R em preto + AV em dourado sobre fundo claro). Sem ícone separado — usar o wordmark também como base do favicon.
 - **Redesign v2 (ago/2026):** cliente rejeitou a direção visual da revisão "Premium+" e pediu uma proposta genuinamente diferente ("não aproveite nada do design atual, precisamos de outra proposta"). Composição reconstruída do zero (nova referência macro, novos padrões de design-bank por seção, predominância clara→escura invertida), mantendo paleta/tipografia/copy/imagens. Detalhes completos em `brief-pack.md` §9.
 
+## Estrutura de deploy (2 pastas independentes)
+Cada LP virou uma pasta de deploy autocontida (CSS/JS/imagens/páginas institucionais/backend PHP
+próprios, sem depender da outra pasta):
+- `deploy-obras/` — LP Obras Comerciais (`index.html` = home)
+- `deploy-reformas/` — LP Reformas Comerciais (`index.html` = home)
+
+**Premissa assumida para os links cruzados** (menu, rodapé, logo): as duas pastas serão publicadas
+como **pastas-irmãs sob o mesmo domínio** — ex. `ravobras.com.br/` (conteúdo de `deploy-obras/`) e
+`ravobras.com.br/reformas/` (conteúdo de `deploy-reformas/`, renomeada para `reformas/` no
+servidor). Os links internos (`../reformas/`, `../obras/`) só funcionam se essa renomeação for
+respeitada no upload — **se a hospedagem final for outra (subdomínios separados, domínios
+diferentes, ou nomes de pasta diferentes), esses links precisam ser reajustados antes do deploy**.
+
 ## Pendências que dependem do usuário
-- Hospedagem final (Vercel vs Hostinger/WordPress) — usando HTML estático como default até decisão.
+- Hospedagem final (Vercel vs Hostinger/WordPress) e a topologia exata das 2 pastas (ver acima) — usando HTML estático + pastas-irmãs como default até decisão.
 - GTM/GA4/Meta Pixel/Google Ads IDs — não fornecidos, módulos de tag pulados (o cookie consent já dispara `dataLayer`, pronto para quando o GTM entrar).
-- Domínio final das 2 LPs — canonical usa `www.ravobras.com.br` como placeholder.
+- Domínio final das 2 LPs — canonical usa `www.ravobras.com.br` (Obras) e `www.ravobras.com.br/reformas/` (Reformas) como placeholder.
 - Confirmação do WhatsApp (11) 94701-8958 como número oficial de conversão (aparece também um número alternativo 11 94791-3486 no PDF institucional — sinalizado para reconciliação do cliente).
 - E-mail de contato oficial (usado `contato@ravobras.com.br` como placeholder no backend/política de privacidade).
-- Backend PHP (`form-handler.php`/`admin.php`/`db-config.php`) instalado mas não configurado — falta host/banco/usuário/senha reais e nova senha de admin antes do deploy.
+- Backend PHP (`form-handler.php`/`admin.php`/`db-config.example.php`) instalado em cada pasta de deploy mas não configurado — falta host/banco/usuário/senha reais (criar `db-config.php` real direto no servidor, nunca versionar) e nova senha de admin antes do deploy. Como são 2 pastas, isso é necessário 2x (uma config por LP) — ou apontar as duas para o mesmo banco com prefixos diferentes (`rav_obras_*` já é o prefixo usado).
 - 3 fotos brutas corrompidas no download do Drive (0 bytes) — ver `imagens/tratadas/MANIFESTO.md`.
 
 ## Checklist do pipeline
@@ -53,5 +66,7 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
       Política de Privacidade, páginas `Site/fornecedores/` e `Site/trabalhe-conosco/`,
       backend PHP (`form-handler.php`/`admin.php`/`db-config.php`, não configurado).
       Tags de analytics (GTM/GA4/Pixel/Ads) puladas — sem IDs do cliente.
-- [ ] 8. 🛑 Revisão humana — **aguardando o usuário** revisar o preview e aprovar
-- [ ] 9. 🛑 Deploy — aguarda aprovação da etapa 8 + hospedagem/domínio/secrets
+- [x] 8. Revisão humana — **aprovado pelo cliente** ("o design ficou bom agora"), após
+      2 rodadas de redesign + ajustes finos de proporção/WCAG. Projeto final organizado
+      em 2 pastas de deploy independentes (`deploy-obras/`, `deploy-reformas/`).
+- [ ] 9. 🛑 Deploy — aguarda hospedagem/domínio/secrets (ver pendências acima)
