@@ -107,10 +107,10 @@
   /* ---------------------------------------------------------------------
      Scroll suave nas âncoras internas (arquitetura "com motor"):
      html usa scroll-behavior:auto e este script cuida do deslocamento,
-     descontando utility-bar + header (ambos fixed, empilhados). Desligado
-     em touch (deixa o momentum nativo) e nunca ativo com overlay aberto.
+     descontando o header fixo. Desligado em touch (deixa o momentum
+     nativo) e nunca ativo com overlay aberto.
   --------------------------------------------------------------------- */
-  var HEADER_OFFSET = 130; /* utility-h (34) + header-h (80) + respiro — mesmo valor do scroll-padding-top em styles.css */
+  var HEADER_OFFSET = 96; /* header-h (80) + respiro — mesmo valor do scroll-padding-top em styles.css */
   function easeInOutQuint(t) { return t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2; }
   var scrollAnim = null;
   function smoothScrollTo(targetY) {

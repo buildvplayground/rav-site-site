@@ -58,7 +58,6 @@
 
   --container:1200px;
   --header-h:80px;
-  --utility-h:34px;
 }
 
 /* ============ RESET ============ */
@@ -66,7 +65,7 @@
 *{margin:0;padding:0}
 /* utility-bar + header ficam ambos fixed, empilhados (34+80px) — mantido
    em sincronia com HEADER_OFFSET em js/app.js. */
-html{-webkit-text-size-adjust:100%;scroll-behavior:auto;scroll-padding-top:130px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto;scroll-padding-top:96px}
 body{
   font-family:var(--font-body);
   color:var(--dark-900);
@@ -173,23 +172,9 @@ main{display:block}
 .btn-lg{padding:18px 34px;font-size:15.5px}
 .btn-block{width:100%;justify-content:center}
 
-/* ============ UTILITY BAR — 1 linha, centralizada, sem bloco próprio ==== */
-.rv-utility{
-  position:fixed;top:0;left:0;right:0;z-index:160;
-  background:var(--color-dark-2);color:var(--dark-300);font-size:12px;
-  border-bottom:1px solid rgba(181,153,117,.16);
-}
-.rv-utility-inner{display:flex;align-items:center;justify-content:center;height:var(--utility-h);gap:10px;flex-wrap:wrap}
-.rv-utility a{color:var(--dark-300);font-weight:500;white-space:nowrap;transition:color var(--t-fast)}
-.rv-utility a:hover{color:var(--color-gold-light)}
-.rv-utility a[aria-current="page"]{color:var(--color-gold-light);font-weight:600}
-.rv-utility-sep{color:var(--dark-600)}
-.rv-utility-phone{display:inline-flex;align-items:center;gap:6px}
-.rv-utility-phone svg{width:12px;height:12px}
-
 /* ============ HEADER — transparente sobre o hero, solidifica ao rolar === */
 .rv-header{
-  position:fixed;top:var(--utility-h);left:0;right:0;z-index:150;
+  position:fixed;top:0;left:0;right:0;z-index:150;
   background:transparent;transition:background var(--t-base),padding var(--t-base),box-shadow var(--t-base);
   padding:22px 0;
 }
@@ -256,7 +241,7 @@ main{display:block}
    qualquer posição plausível do topo do texto (~25-29% da altura do hero
    nas duas LPs) — só o topo (~12%) fica mais claro para respirar a foto. */
 .rv-hero-overlay{background:linear-gradient(180deg,rgba(17,17,19,.10) 0%,rgba(17,17,19,.50) 12%,rgba(17,17,19,.88) 25%,rgba(17,17,19,.94) 100%)}
-.rv-hero-inner{position:relative;z-index:1;padding:calc(var(--header-h) + var(--utility-h) + 64px) 24px 80px;width:100%}
+.rv-hero-inner{position:relative;z-index:1;padding:calc(var(--header-h) + 64px) 24px 80px;width:100%}
 .rv-hero-content{max-width:840px}
 .rv-hero-content .rv-tag{color:var(--color-gold-light)}
 .rv-hero h1{font-size:clamp(36px,5.6vw,68px);font-weight:800;letter-spacing:-.02em;margin-bottom:24px;color:#fff}
