@@ -19,7 +19,9 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
 
 ## Identidade visual (extraída do MIV)
 - **Paleta:** `#B59975` (dourado/bronze — cor de destaque), `#D3C095` (dourado claro), `#18181B` (quase preto), `#F4F4F5` (quase branco).
-- **Tipografia:** Poppins.
+- **Tipografia:** ~~Poppins~~ → **Montserrat + Inter** (revisão "Premium+" pedida pelo
+  cliente na etapa 8 — ver `brief-pack.md` §8). Montserrat 600/700/800 em
+  headlines/overlines/números/CTAs; Inter 400/500/600 em corpo/nav/formulários.
 - **Logotipo:** wordmark "RAV" (R em cinza/prata + AV em dourado sobre fundo escuro; R em preto + AV em dourado sobre fundo claro). Sem ícone separado — usar o wordmark também como base do favicon.
 
 ## Pendências que dependem do usuário

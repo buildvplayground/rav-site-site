@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["C:\\Users\\DELL\\AppData\\Local\\Temp\\claude\\C--Users-DELL-Documents-PROJETOS-rav-site\\cf7b3eea-e8c9-4b65-8c2d-fc076be6c355\\scratchpad\\serve.py"],
       "port": 8791
+    },
+    {
+      "name": "rav-site-root-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["C:\\Users\\DELL\\AppData\\Local\\Temp\\claude\\C--Users-DELL-Documents-PROJETOS-rav-site\\cf7b3eea-e8c9-4b65-8c2d-fc076be6c355\\scratchpad\\serve_root.py"],
+      "port": 8792
     }
   ]
 }

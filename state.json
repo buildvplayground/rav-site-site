@@ -13,7 +13,7 @@
     { "n": 5, "nome": "Front-end (2 LPs)", "status": "done" },
     { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "done" },
     { "n": 7, "nome": "Tags e módulos LGPD", "status": "done" },
-    { "n": 8, "nome": "Revisão humana", "status": "blocked" },
+    { "n": 8, "nome": "Revisão humana", "status": "blocked", "nota": "Cliente pediu revisão de design (\"Premium+\", tipografia Montserrat+Inter) durante a etapa 8 — aplicada em todo o site (LPs + fornecedores/trabalhe-conosco + admin.php). Ver brief-pack.md §8. Aguardando novo aprovar do usuário." },
     { "n": 9, "nome": "Deploy", "status": "blocked" }
   ],
   "pendencias": [
