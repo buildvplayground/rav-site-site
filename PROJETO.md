@@ -18,11 +18,13 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
 - Pendente em `_raw/`: nenhum (só sobraram as pastas vazias + cópias duplicadas das copies, já replicadas em `Copys/`).
 
 ## Identidade visual (extraída do MIV)
-- **Paleta:** `#B59975` (dourado/bronze — cor de destaque), `#D3C095` (dourado claro), `#18181B` (quase preto), `#F4F4F5` (quase branco).
+- **Paleta:** `#B59975` (dourado/bronze — cor de destaque), `#D3C095` (dourado claro), `#18181B` (quase preto), `#F4F4F5` (quase branco). Inalterada nas 2 revisões de design.
 - **Tipografia:** ~~Poppins~~ → **Montserrat + Inter** (revisão "Premium+" pedida pelo
-  cliente na etapa 8 — ver `brief-pack.md` §8). Montserrat 600/700/800 em
-  headlines/overlines/números/CTAs; Inter 400/500/600 em corpo/nav/formulários.
+  cliente na etapa 8 — ver `brief-pack.md` §8, mantida na revisão v2 — ver §9).
+  Montserrat 600/700/800 em headlines/overlines/números/CTAs; Inter 400/500/600
+  em corpo/nav/formulários.
 - **Logotipo:** wordmark "RAV" (R em cinza/prata + AV em dourado sobre fundo escuro; R em preto + AV em dourado sobre fundo claro). Sem ícone separado — usar o wordmark também como base do favicon.
+- **Redesign v2 (ago/2026):** cliente rejeitou a direção visual da revisão "Premium+" e pediu uma proposta genuinamente diferente ("não aproveite nada do design atual, precisamos de outra proposta"). Composição reconstruída do zero (nova referência macro, novos padrões de design-bank por seção, predominância clara→escura invertida), mantendo paleta/tipografia/copy/imagens. Detalhes completos em `brief-pack.md` §9.
 
 ## Pendências que dependem do usuário
 - Hospedagem final (Vercel vs Hostinger/WordPress) — usando HTML estático como default até decisão.
@@ -41,7 +43,10 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
 - [x] 4. Copy das 2 LPs estruturada para o front-end (skill: extrair-copy)
 - [x] 5. Front-end das 2 LPs criado (skill: gerar-frontend) — `Site/index.html` (Obras) +
       `Site/reformas.html` (Reformas), CSS/JS compartilhados, auditado via
-      `revisar-frontend` (0 achados bloqueantes ao final; ver `brief-pack.md` §7)
+      `revisar-frontend` (0 achados bloqueantes ao final; ver `brief-pack.md` §7).
+      Redesenhado 2x durante a revisão humana (etapa 8): revisão "Premium+"
+      (tipografia, ver §8) e depois redesign completo v2 (nova composição/UI,
+      ver §9) — funcionalidades e conteúdo preservados em ambas.
 - [x] 6. Ajustes finais — imagens em `.webp`, responsivo 320–1280px sem overflow, menu
       mobile/lightbox/FAQ/tabela comparativa testados funcionalmente
 - [x] 7. Módulos LGPD instalados — banner de cookies (dispara `dataLayer`), modal de
