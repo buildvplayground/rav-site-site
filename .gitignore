@@ -1,0 +1,26 @@
+# Material bruto e pesado — não versionar
+_raw/
+*.psd
+*.ai
+
+# Pastas de trabalho locais (ficam local + Drive, não no git)
+imagens/
+Marca/
+Copys/
+design-system/
+Site/
+brief-pack.md
+
+# Segredos — NUNCA versionar (só o .example)
+db-config.php
+.env
+.env.*
+!.env.example
+*-secret*
+*credenciais*
+
+# Build/infra
+node_modules/
+.vercel/
+.DS_Store
+*.log

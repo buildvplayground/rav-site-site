@@ -1,0 +1,33 @@
+{
+  "cliente": "RAV Obras (Rav Obras Ltda)",
+  "slug": "rav-site",
+  "segmento": "Construção civil — obras e reformas comerciais/corporativas (B2B)",
+  "escopo": "2 landing pages independentes: Obras Comerciais (turnkey) e Reformas Comerciais (drywall/pisos)",
+  "etapa_atual": 2,
+  "etapas": [
+    { "n": 1, "nome": "Extração do Drive", "status": "done" },
+    { "n": 2, "nome": "Scaffold do projeto + logo extraída do MIV", "status": "done" },
+    { "n": "2b", "nome": "Repositório GitHub", "status": "pending" },
+    { "n": 3, "nome": "Design system", "status": "pending" },
+    { "n": 4, "nome": "Copy estruturada (2 LPs)", "status": "done" },
+    { "n": 5, "nome": "Front-end (2 LPs)", "status": "pending" },
+    { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "pending" },
+    { "n": 7, "nome": "Tags e módulos LGPD", "status": "pending" },
+    { "n": 8, "nome": "Revisão humana", "status": "pending" },
+    { "n": 9, "nome": "Deploy", "status": "pending" }
+  ],
+  "pendencias": [
+    "Hospedagem final não definida (Vercel vs Hostinger/WordPress) — usando HTML estático como default",
+    "GTM/GA4/Meta Pixel/Google Ads IDs não fornecidos — módulos de tag pulados na etapa 7",
+    "Domínio final das 2 LPs não definido",
+    "Discrepância de telefone: copy usa (11) 94701-8958, PDF institucional traz (11) 94791-3486 — cliente precisa confirmar o número oficial",
+    "Marca não tem ícone/monograma dedicado (só wordmark) — favicon será derivado do wordmark, cliente pode querer um ícone próprio no futuro"
+  ],
+  "links": {
+    "drive": "https://drive.google.com/drive/folders/1-H2kNE2krNI2BOzBHW-6WSk9Vi2MHPWA",
+    "repo": null,
+    "preview": null,
+    "dominio": null
+  },
+  "atualizado_em": "2026-08-10"
+}
