@@ -3,12 +3,12 @@
   "slug": "rav-site",
   "segmento": "Construção civil — obras e reformas comerciais/corporativas (B2B)",
   "escopo": "2 landing pages independentes: Obras Comerciais (turnkey) e Reformas Comerciais (drywall/pisos)",
-  "etapa_atual": 2,
+  "etapa_atual": 5,
   "etapas": [
     { "n": 1, "nome": "Extração do Drive", "status": "done" },
     { "n": 2, "nome": "Scaffold do projeto + logo extraída do MIV", "status": "done" },
-    { "n": "2b", "nome": "Repositório GitHub", "status": "pending" },
-    { "n": 3, "nome": "Design system", "status": "pending" },
+    { "n": "2b", "nome": "Repositório GitHub", "status": "done" },
+    { "n": 3, "nome": "Design system", "status": "done" },
     { "n": 4, "nome": "Copy estruturada (2 LPs)", "status": "done" },
     { "n": 5, "nome": "Front-end (2 LPs)", "status": "pending" },
     { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "pending" },
@@ -25,7 +25,7 @@
   ],
   "links": {
     "drive": "https://drive.google.com/drive/folders/1-H2kNE2krNI2BOzBHW-6WSk9Vi2MHPWA",
-    "repo": null,
+    "repo": "https://github.com/dev-buildv/rav-site-site",
     "preview": null,
     "dominio": null
   },
