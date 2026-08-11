@@ -25,6 +25,7 @@ CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958
   em corpo/nav/formulários.
 - **Logotipo:** wordmark "RAV" (R em cinza/prata + AV em dourado sobre fundo escuro; R em preto + AV em dourado sobre fundo claro). Sem ícone separado — usar o wordmark também como base do favicon.
 - **Redesign v2 (ago/2026):** cliente rejeitou a direção visual da revisão "Premium+" e pediu uma proposta genuinamente diferente ("não aproveite nada do design atual, precisamos de outra proposta"). Composição reconstruída do zero (nova referência macro, novos padrões de design-bank por seção, predominância clara→escura invertida), mantendo paleta/tipografia/copy/imagens. Detalhes completos em `brief-pack.md` §9.
+- **Seções com imagem (ago/2026):** após aprovar a v2, cliente pediu mais seções amarradas a foto real (fullwidth/split), além do hero e do portfólio. Adicionadas 3: faixa fullwidth (`.rv-band`, dentro de "Onde atuamos/reformamos"), split imagem+texto (`.rv-split`, nova seção "Quem conduz sua obra/reforma") e colagem assimétrica em "Sobre a RAV" (`.rv-collage`). 6 fotos novas curadas de `imagens/originais_obras/` (só 12-14 das 407 haviam sido tratadas antes). Detalhes em `brief-pack.md` §10 e `imagens/tratadas/MANIFESTO.md`.
 
 ## Estrutura de deploy (2 pastas independentes)
 Cada LP virou uma pasta de deploy autocontida (CSS/JS/imagens/páginas institucionais/backend PHP
@@ -69,4 +70,7 @@ diferentes, ou nomes de pasta diferentes), esses links precisam ser reajustados 
 - [x] 8. Revisão humana — **aprovado pelo cliente** ("o design ficou bom agora"), após
       2 rodadas de redesign + ajustes finos de proporção/WCAG. Projeto final organizado
       em 2 pastas de deploy independentes (`deploy-obras/`, `deploy-reformas/`).
+      Rodada extra pós-aprovação: 3 seções novas com imagem (faixa fullwidth, split
+      imagem+texto, colagem em "Sobre a RAV") + 6 fotos curadas, sincronizado em `Site/`
+      e nas 2 pastas de deploy — ver `brief-pack.md` §10.
 - [ ] 9. 🛑 Deploy — aguarda hospedagem/domínio/secrets (ver pendências acima)

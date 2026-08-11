@@ -13,7 +13,7 @@
     { "n": 5, "nome": "Front-end (2 LPs)", "status": "done" },
     { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "done" },
     { "n": 7, "nome": "Tags e módulos LGPD", "status": "done" },
-    { "n": 8, "nome": "Revisão humana", "status": "done", "nota": "2 rodadas de redesign (Premium+ com Montserrat/Inter, depois v2 com nova referência macro ot-engenharia) + ajustes finos de proporção/WCAG em 4 seções. Cliente aprovou: \"o design ficou bom agora\". Projeto reorganizado em deploy-obras/ e deploy-reformas/ (pastas independentes por LP)." },
+    { "n": 8, "nome": "Revisão humana", "status": "done", "nota": "2 rodadas de redesign (Premium+ com Montserrat/Inter, depois v2 com nova referência macro ot-engenharia) + ajustes finos de proporção/WCAG em 4 seções. Cliente aprovou: \"o design ficou bom agora\". Projeto reorganizado em deploy-obras/ e deploy-reformas/ (pastas independentes por LP). Rodada extra: cliente pediu mais seções com imagem (fullwidth/split) amarradas à copy — adicionadas 3 seções novas (faixa fullwidth, split imagem+texto, colagem em 'Sobre a RAV') com 6 fotos curadas de imagens/originais_obras/, sincronizado em Site/ e nas 2 pastas de deploy. Ver brief-pack.md §10." },
     { "n": 9, "nome": "Deploy", "status": "blocked", "nota": "Pastas de deploy prontas (deploy-obras/, deploy-reformas/); falta hospedagem, domínio, secrets FTP/DB e confirmação da topologia de URL entre as 2 LPs (ver pendencias)." }
   ],
   "pendencias": [
@@ -34,5 +34,5 @@
     "preview": "http://localhost:8793/deploy-obras/index.html e http://localhost:8793/deploy-reformas/index.html",
     "dominio": null
   },
-  "atualizado_em": "2026-08-10"
+  "atualizado_em": "2026-08-11"
 }

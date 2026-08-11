@@ -63,8 +63,7 @@
 /* ============ RESET ============ */
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0;padding:0}
-/* utility-bar + header ficam ambos fixed, empilhados (34+80px) — mantido
-   em sincronia com HEADER_OFFSET em js/app.js. */
+/* header fixo (80px) — mantido em sincronia com HEADER_OFFSET em js/app.js. */
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto;scroll-padding-top:96px}
 body{
   font-family:var(--font-body);
@@ -417,6 +416,72 @@ main{display:block}
 @media (max-width:640px){
   .rv-timeline-row{grid-template-columns:1fr;gap:8px}
   .rv-timeline-year{font-size:32px}
+}
+
+/* ==========================================================================
+   SEÇÕES COM IMAGEM (rodada extra, ago/2026) — cliente pediu mais seções
+   amarradas à foto real (fullwidth ou split), além do hero e do grid de
+   portfólio. 3 componentes novos: faixa fullwidth, split imagem+texto,
+   colagem assimétrica (Sobre a RAV). Fotos novas em imagens/tratadas/ —
+   ver MANIFESTO.md "Rodada 2 de curadoria".
+   ========================================================================== */
+
+/* ---- Faixa de imagem fullwidth (dentro de "Onde atuamos/reformamos") --- */
+.rv-band{position:relative;width:100%;height:clamp(220px,32vw,380px);overflow:hidden;margin-top:64px}
+.rv-band img{width:100%;height:100%;object-fit:cover;display:block}
+/* O piso seguro precisa começar a uma distância FIXA em px do rodapé (não a
+   uma % da altura da faixa) — numa faixa curta (220px no clamp mínimo), um
+   stop em "42%" cai bem perto do texto e só entrega ~0.2-0.4 de alpha ali
+   (contraste 1.5-2.8:1, falha), porque a legenda tem altura fixa em px
+   (eyebrow+título+padding) mas a faixa tem altura variável. calc(100% -
+   130px) ancora o piso .88 (mesmo valor já verificado no overlay do hero)
+   a 130px do rodapé sempre, cobrindo a legenda em qualquer altura de faixa. */
+.rv-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,19,0) 0%,rgba(17,17,19,.2) 45%,rgba(17,17,19,.88) calc(100% - 175px),rgba(17,17,19,.93) 100%)}
+.rv-band-caption{position:absolute;left:0;right:0;bottom:0;z-index:1;padding-bottom:30px}
+.rv-band-caption span{display:block;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-gold-light);margin-bottom:6px}
+.rv-band-caption p{font-family:var(--font-display);font-weight:700;font-size:clamp(17px,2.2vw,23px);color:#fff;max-width:560px;text-wrap:balance}
+@media (max-width:560px){.rv-band{margin-top:48px}.rv-band-caption{padding-bottom:20px}}
+
+/* ---- Split imagem+texto (novo — "Quem conduz sua obra/reforma") ------- */
+.rv-split{padding:0}
+.rv-split-grid{display:grid;grid-template-columns:1fr 1fr;min-height:540px}
+.rv-split-media{position:relative;overflow:hidden;background:var(--dark-800)}
+.rv-split-media img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-split-text{display:flex;flex-direction:column;justify-content:center;padding:72px clamp(28px,6vw,88px)}
+.rv-split-text .rv-lede{margin-bottom:0}
+.rv-split-list{margin-top:28px;display:flex;flex-direction:column;gap:18px}
+.rv-split-list li{display:flex;gap:12px;align-items:flex-start;font-family:var(--font-body);font-size:15px}
+.rv-split-list svg{width:19px;height:19px;flex-shrink:0;margin-top:2px;color:var(--color-gold)}
+.rv-light .rv-split-list svg{color:var(--gold-ink)}
+/* variante --flip: inverte qual lado leva a foto (variedade entre as 2 LPs) */
+.rv-split--flip .rv-split-media{order:2}
+@media (max-width:860px){
+  .rv-split-grid{grid-template-columns:1fr;min-height:0}
+  .rv-split-media{aspect-ratio:4/3;order:0 !important}
+  .rv-split-text{padding:48px 24px}
+}
+
+/* ---- Colagem assimétrica (Sobre a RAV — 2 fotos de proporções diferentes,
+   sobrepostas, ao lado da timeline) ---- */
+.rv-about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.rv-about-grid--flip{grid-template-columns:1.15fr .85fr}
+.rv-about-grid--flip .rv-collage{grid-column:2;grid-row:1}
+.rv-about-grid--flip .rv-timeline{grid-column:1;grid-row:1}
+.rv-collage{position:relative;margin-bottom:64px}
+.rv-collage::before{content:"";position:absolute;left:-16px;top:26px;width:104px;height:104px;background:var(--gradient-gold);opacity:.32;z-index:0}
+/* height:auto explícito é necessário: os atributos HTML width/height (para
+   evitar CLS) fixam uma altura literal que vence aspect-ratio a menos que
+   height volte a ser "auto" — sem isso a imagem renderiza no tamanho
+   intrínseco do arquivo, não no aspect-ratio pretendido pelo recorte. */
+.rv-collage-a{position:relative;z-index:1;width:82%;height:auto;aspect-ratio:16/9;object-fit:cover;box-shadow:var(--shadow-lg)}
+.rv-collage-b{position:absolute;z-index:2;right:0;bottom:-40px;width:50%;height:auto;aspect-ratio:4/5;object-fit:cover;box-shadow:var(--shadow-lg);border:6px solid var(--color-light)}
+.rv-dark .rv-collage-b{border-color:var(--color-dark)}
+@media (max-width:900px){
+  .rv-about-grid,.rv-about-grid--flip{grid-template-columns:1fr;gap:16px}
+  .rv-about-grid--flip .rv-collage,.rv-about-grid--flip .rv-timeline{grid-column:1}
+  .rv-collage{display:flex;flex-direction:column;gap:14px;margin-bottom:8px}
+  .rv-collage::before{display:none}
+  .rv-collage-a,.rv-collage-b{position:static;width:100%;aspect-ratio:4/3;border:none}
 }
 
 /* ============ GRID DE CASOS / PORTFÓLIO — legenda editorial abaixo ====== */
