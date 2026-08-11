@@ -461,27 +461,57 @@ main{display:block}
   .rv-split-text{padding:48px 24px}
 }
 
-/* ---- Colagem assimétrica (Sobre a RAV — 2 fotos de proporções diferentes,
-   sobrepostas, ao lado da timeline) ---- */
-.rv-about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
-.rv-about-grid--flip{grid-template-columns:1.15fr .85fr}
-.rv-about-grid--flip .rv-collage{grid-column:2;grid-row:1}
+/* ---- Díptico vertical com profundidade (Sobre a RAV — refeito: cliente
+   achou a colagem original pequena/com vazio embaixo. Diagnóstico: a coluna
+   de foto era a mais ESTREITA do grid (.85fr) e a foto B era absolute (fora
+   do fluxo), então a altura real do bloco vinha só da foto A — bem menor
+   que a timeline ao lado, sobrando vazio embaixo.
+   Correção estrutural (não é só "aumentar"): coluna de foto agora é IGUAL
+   ou MAIOR que a da timeline; align-items:stretch faz o bloco de fotos
+   esticar para a altura real da linha do grid (a mesma da timeline).
+   1ª tentativa usou grid-template-rows (3fr/2fr) DENTRO do .rv-diptych —
+   mas isso cria um ciclo: sem altura própria definida, o conteúdo (as
+   fotos) "puxa" a altura de conteúdo do .rv-diptych para o tamanho
+   intrínseco das imagens (>2000px), e essa contribuição infla a própria
+   ALTURA AUTOMÁTICA DA LINHA do grid externo — os dois lados esticam
+   juntos para esse valor gigante, sobrando vazio agora do lado do texto.
+   Correção final: as 2 fotos são position:absolute (saem do fluxo, não
+   contribuem para o cálculo de altura automática do .rv-diptych) com
+   top/height em % (60/40) — a altura do .rv-diptych vem só do stretch
+   do grid externo (que agora reflete a altura real da timeline), e o
+   split percentual das fotos resolve depois, contra essa altura já
+   definida — sem ciclo.
+   Referência: inspirado em planeta-card-empreendimento-foto-dupla (2ª foto
+   com moldura clara deliberada, "duas informações visuais" no mesmo bloco),
+   adaptado de card pequeno para bloco full-height de coluna — variação
+   própria, não há no banco um padrão de díptico vertical full-height. ---- */
+.rv-about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:stretch}
+.rv-about-grid--flip{grid-template-columns:1fr 1.1fr}
+.rv-about-grid--flip .rv-diptych{grid-column:2;grid-row:1}
 .rv-about-grid--flip .rv-timeline{grid-column:1;grid-row:1}
-.rv-collage{position:relative;margin-bottom:64px}
-.rv-collage::before{content:"";position:absolute;left:-16px;top:26px;width:104px;height:104px;background:var(--gradient-gold);opacity:.32;z-index:0}
-/* height:auto explícito é necessário: os atributos HTML width/height (para
-   evitar CLS) fixam uma altura literal que vence aspect-ratio a menos que
-   height volte a ser "auto" — sem isso a imagem renderiza no tamanho
-   intrínseco do arquivo, não no aspect-ratio pretendido pelo recorte. */
-.rv-collage-a{position:relative;z-index:1;width:82%;height:auto;aspect-ratio:16/9;object-fit:cover;box-shadow:var(--shadow-lg)}
-.rv-collage-b{position:absolute;z-index:2;right:0;bottom:-40px;width:50%;height:auto;aspect-ratio:4/5;object-fit:cover;box-shadow:var(--shadow-lg);border:6px solid var(--color-light)}
-.rv-dark .rv-collage-b{border-color:var(--color-dark)}
+.rv-diptych{
+  position:relative;overflow:hidden;
+  background:var(--gradient-gold);box-shadow:var(--shadow-lg);
+  min-height:420px;
+}
+.rv-diptych-a,.rv-diptych-b{position:absolute;left:0;right:0;overflow:hidden;background:var(--dark-800)}
+.rv-diptych-a{top:0;height:60%}
+.rv-diptych-b{top:calc(60% + 4px);bottom:0}
+.rv-diptych-a img,.rv-diptych-b img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.rv-diptych-tag{
+  position:absolute;left:16px;bottom:16px;z-index:1;
+  font-family:var(--font-display);font-weight:700;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--color-dark);background:var(--color-gold-light);padding:6px 12px;
+}
 @media (max-width:900px){
-  .rv-about-grid,.rv-about-grid--flip{grid-template-columns:1fr;gap:16px}
-  .rv-about-grid--flip .rv-collage,.rv-about-grid--flip .rv-timeline{grid-column:1}
-  .rv-collage{display:flex;flex-direction:column;gap:14px;margin-bottom:8px}
-  .rv-collage::before{display:none}
-  .rv-collage-a,.rv-collage-b{position:static;width:100%;aspect-ratio:4/3;border:none}
+  .rv-about-grid,.rv-about-grid--flip{grid-template-columns:1fr;gap:32px}
+  .rv-about-grid--flip .rv-diptych,.rv-about-grid--flip .rv-timeline{grid-column:1}
+  /* Sem coluna ao lado para "casar" altura, volta a fluxo normal empilhado
+     com aspect-ratio por foto — position:absolute não faria sentido aqui. */
+  .rv-diptych{min-height:0}
+  .rv-diptych-a,.rv-diptych-b{position:static;width:100%;height:auto;top:auto;bottom:auto}
+  .rv-diptych-a{aspect-ratio:16/10}
+  .rv-diptych-b{aspect-ratio:16/11;margin-top:4px}
 }
 
 /* ============ GRID DE CASOS / PORTFÓLIO — legenda editorial abaixo ====== */
