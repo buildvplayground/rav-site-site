@@ -345,6 +345,57 @@ main{display:block}
 .rv-index-item:hover .rv-index-item-label{color:var(--color-gold-light)}
 .rv-light .rv-index-item:hover .rv-index-item-label{color:var(--gold-ink)}
 
+/* ---- Galeria por segmento (pedido do cliente: clicar num segmento e ver
+   fotos daquele tipo). A lista de segmentos vira um seletor; ao lado (desktop)
+   / abaixo (mobile) um painel mostra as fotos do segmento ativo; clicar numa
+   foto abre o lightbox já existente. Data-driven: RAV_SEGMENTS em js/app.js. ---- */
+.rv-segments{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:start}
+/* botões-segmento herdam o visual editorial da lista; reset de <button> */
+button.rv-index-item{width:100%;text-align:left;font:inherit;color:inherit;background:none;border:none;border-bottom:1px solid rgba(181,153,117,.2);cursor:pointer}
+.rv-index-item-cue{
+  margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:7px;
+  font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  /* opacity:1 (não .75): a .75 sobre o fundo escuro o dourado caía p/ ~4.26:1,
+     abaixo do mínimo AA de 4.5:1 p/ texto pequeno. Cheio = 6.5:1. */
+  color:var(--color-gold);opacity:1;transition:transform var(--t-fast)}
+.rv-light .rv-index-item-cue{color:var(--gold-ink)}
+.rv-index-item-cue svg{width:13px;height:13px}
+button.rv-index-item:hover .rv-index-item-cue,button.rv-index-item.is-active .rv-index-item-cue{transform:translateX(3px)}
+button.rv-index-item.is-active .rv-index-item-label{color:var(--color-gold-light)}
+.rv-light button.rv-index-item.is-active .rv-index-item-label{color:var(--gold-ink)}
+button.rv-index-item.is-active::after{width:100%}
+/* segmento sem foto — não clicável, estado "em breve" discreto */
+.rv-index-item--soon{opacity:.6}
+.rv-index-item--soon .rv-index-item-cue--soon{color:var(--dark-300);opacity:1;letter-spacing:.08em}
+.rv-light .rv-index-item--soon .rv-index-item-cue--soon{color:var(--dark-400)}
+.rv-index-item--soon::after{display:none}
+
+/* painel de galeria */
+.rv-seg-panel{position:sticky;top:calc(var(--header-h) + 20px)}
+.rv-seg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rv-seg-thumb{
+  position:relative;display:block;padding:0;border:none;background:var(--dark-800);
+  aspect-ratio:4/3;overflow:hidden;cursor:zoom-in;border-radius:var(--radius-sm);
+}
+.rv-seg-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-house)}
+.rv-seg-thumb::after{content:"";position:absolute;inset:0;border:1px solid rgba(181,153,117,.22);transition:border-color var(--t-base)}
+.rv-seg-thumb:hover img,.rv-seg-thumb:focus-visible img{transform:scale(1.05)}
+.rv-seg-thumb:hover::after,.rv-seg-thumb:focus-visible::after{border-color:rgba(211,192,149,.85)}
+.rv-seg-thumb-icon{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(17,17,19,.6);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.rv-seg-thumb-icon svg{width:15px;height:15px;color:#fff}
+@media (max-width:860px){
+  .rv-segments{grid-template-columns:1fr;gap:36px}
+  .rv-seg-panel{position:static}
+}
+/* Em telas estreitas o rótulo do segmento + o "Ver fotos"/"Fotos em breve"
+   não cabem na mesma linha — deixa o cue quebrar para a linha de baixo
+   (evita overflow horizontal a 320px). */
+@media (max-width:560px){
+  .rv-index-item{flex-wrap:wrap;gap:4px 16px}
+  .rv-index-item-label{flex:1 1 auto}
+  .rv-index-item-cue{margin-left:52px}
+}
+
 /* ============ CONTRASTE EDITORIAL (A diferença RAV) ======================
    Marcado como <table role="table"> de verdade (2 células por linha) para
    leitor de tela; o "divisor" central é só a border-right da 1ª célula, não
