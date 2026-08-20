@@ -14,6 +14,9 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isTouch = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
   var docEl = document.documentElement;
+  /* Preenchido pelo módulo do lightbox; usado também pela galeria por segmento
+     para abrir QUALQUER lista de imagens no mesmo lightbox. */
+  var openLightbox = null;
 
   /* ---------------------------------------------------------------------
      Ano do rodapé
@@ -259,44 +262,34 @@
     var prevBtn = lb.querySelector('[data-lb-prev]');
     var nextBtn = lb.querySelector('[data-lb-next]');
     var counter = lb.querySelector('[data-lb-count]');
-    var figs = [].slice.call(document.querySelectorAll('.rv-case'));
-    if (!figs.length) return;
-    var lastFocused = null, cur = 0;
-    if (figs.length < 2) lb.setAttribute('data-single', 'true');
-
-    figs.forEach(function (fig, i) {
-      var im = fig.querySelector('img');
-      var alt = im ? (im.getAttribute('alt') || '') : '';
-      fig.setAttribute('tabindex', '0');
-      fig.setAttribute('role', 'button');
-      fig.setAttribute('aria-label', 'Ampliar foto' + (alt ? ': ' + alt : ''));
-      fig.addEventListener('click', function () { open(i); });
-      fig.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
-      });
-    });
+    var lastFocused = null, cur = 0, items = [];
 
     function isOpen() { return lb.getAttribute('data-open') === 'true'; }
     function show(i) {
-      cur = ((i % figs.length) + figs.length) % figs.length;
-      var im = figs[cur].querySelector('img');
-      if (!im) return;
-      var src = im.currentSrc || im.getAttribute('src');
-      var alt = im.getAttribute('alt') || '';
-      if (counter) counter.textContent = (cur + 1) + ' / ' + figs.length;
-      img.setAttribute('src', src);
-      img.setAttribute('alt', alt);
+      if (!items.length) return;
+      cur = ((i % items.length) + items.length) % items.length;
+      var it = items[cur];
+      if (counter) counter.textContent = (cur + 1) + ' / ' + items.length;
+      img.setAttribute('src', it.src || '');
+      img.setAttribute('alt', it.alt || '');
     }
-    function open(i) {
+    /* Abre o lightbox com QUALQUER lista [{src, alt}] a partir do índice i.
+       Exposto em openLightbox p/ o portfólio e a galeria por segmento. */
+    function openWith(list, i) {
+      items = list || [];
+      if (!items.length) return;
+      lb.setAttribute('data-single', items.length < 2 ? 'true' : 'false');
       lastFocused = document.activeElement;
       lb.setAttribute('data-open', 'true');
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
-      show(i);
+      show(i || 0);
       requestAnimationFrame(function () { requestAnimationFrame(function () { lb.classList.add('is-visible'); }); });
       setTimeout(function () { lb.classList.add('is-visible'); }, 80);
       if (closeBtn) try { closeBtn.focus(); } catch (e) {}
     }
+    openLightbox = openWith;
+
     function close() {
       lb.classList.remove('is-visible');
       lb.setAttribute('aria-hidden', 'true');
@@ -334,11 +327,106 @@
     }, { passive: true });
     lb.addEventListener('touchend', function (e) {
       if (!swiping) return; swiping = false;
-      if (figs.length < 2) return;
+      if (items.length < 2) return;
       var t = e.changedTouches[0];
       var dx = t.clientX - sx, dy = t.clientY - sy;
       if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.3) show(cur + (dx < 0 ? 1 : -1));
     }, { passive: true });
+
+    /* Portfólio (.rv-case): monta a lista uma vez e abre o lightbox no clique */
+    var figs = [].slice.call(document.querySelectorAll('.rv-case'));
+    if (figs.length) {
+      var caseItems = figs.map(function (fig) {
+        var im = fig.querySelector('img');
+        return { src: im ? (im.getAttribute('src') || '') : '', alt: im ? (im.getAttribute('alt') || '') : '' };
+      });
+      figs.forEach(function (fig, i) {
+        var im = fig.querySelector('img');
+        var alt = im ? (im.getAttribute('alt') || '') : '';
+        fig.setAttribute('tabindex', '0');
+        fig.setAttribute('role', 'button');
+        fig.setAttribute('aria-label', 'Ampliar foto' + (alt ? ': ' + alt : ''));
+        fig.addEventListener('click', function () { openWith(caseItems, i); });
+        fig.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWith(caseItems, i); }
+        });
+      });
+    }
+  })();
+
+  /* ---------------------------------------------------------------------
+     Galeria por segmento — a lista de "Onde atuamos/reformamos" vira um
+     seletor; ao lado (desktop) / abaixo (mobile) um painel mostra as fotos
+     do segmento ativo. Clicar numa foto reabre o mesmo lightbox.
+     Data-driven: RAV_SEGMENTS mapeia segmento -> lista de fotos. Para
+     adicionar fotos por segmento depois, basta editar esse objeto. Segmentos
+     sem foto ficam não-clicáveis (marcados no HTML como --soon).
+  --------------------------------------------------------------------- */
+  var RAV_SEGMENTS = {
+    escritorios: [
+      { src: 'assets/img/segmentos/seg-escritorios-1.webp', alt: 'Sala de gerência com divisórias de vidro e marcenaria, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-escritorios-2.webp', alt: 'Escritório em open space com estações de trabalho, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-escritorios-3.webp', alt: 'Escritório individual com estação de trabalho, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-escritorios-4.webp', alt: 'Recepção corporativa com estações de trabalho, obra comercial entregue pela RAV' }
+    ],
+    clinicas: [
+      { src: 'assets/img/segmentos/seg-clinicas-1.webp', alt: 'Sala de espera de clínica com poltronas, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-clinicas-2.webp', alt: 'Fileira de consultórios com portas, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-clinicas-3.webp', alt: 'Recepção de clínica com balcão de atendimento, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-clinicas-4.webp', alt: 'Área de espera de clínica finalizada, obra comercial entregue pela RAV' }
+    ],
+    laboratorios: [
+      { src: 'assets/img/segmentos/seg-laboratorios-1.webp', alt: 'Laboratório com instrumentos sobre bancada, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-laboratorios-2.webp', alt: 'Laboratório com bancada de inox e equipamentos, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-laboratorios-3.webp', alt: 'Sala de laboratório com bancada e armários, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-laboratorios-4.webp', alt: 'Laboratório com capela de exaustão, obra comercial entregue pela RAV' }
+    ],
+    lojas: [
+      { src: 'assets/img/segmentos/seg-lojas-1.webp', alt: 'Fachada de loja de varejo finalizada, obra comercial entregue pela RAV' },
+      { src: 'assets/img/segmentos/seg-lojas-2.webp', alt: 'Galpão comercial finalizado, obra comercial entregue pela RAV' }
+    ]
+  };
+  (function () {
+    var root = document.querySelector('[data-segments]');
+    if (!root) return;
+    var panel = root.querySelector('[data-seg-panel]');
+    var buttons = [].slice.call(root.querySelectorAll('[data-seg]'));
+    if (!panel || !buttons.length) return;
+    var ZOOM_SVG = '<span class="rv-seg-thumb-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></span>';
+
+    function buildPanel(seg) {
+      var photos = RAV_SEGMENTS[seg] || [];
+      panel.innerHTML = '';
+      if (!photos.length) return;
+      var grid = document.createElement('div');
+      grid.className = 'rv-seg-grid';
+      photos.forEach(function (p, i) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rv-seg-thumb';
+        btn.setAttribute('aria-label', 'Ampliar foto' + (p.alt ? ': ' + p.alt : ''));
+        var im = document.createElement('img');
+        im.src = p.src; im.alt = p.alt || ''; im.loading = 'lazy';
+        btn.appendChild(im);
+        btn.insertAdjacentHTML('beforeend', ZOOM_SVG);
+        btn.addEventListener('click', function () { if (openLightbox) openLightbox(photos, i); });
+        grid.appendChild(btn);
+      });
+      panel.appendChild(grid);
+    }
+    function select(btn) {
+      buttons.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+      buildPanel(btn.getAttribute('data-seg'));
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () { select(btn); });
+    });
+    var withPhotos = buttons.filter(function (b) { return (RAV_SEGMENTS[b.getAttribute('data-seg')] || []).length; });
+    if (withPhotos.length) select(withPhotos[0]);
   })();
 
   /* ---------------------------------------------------------------------

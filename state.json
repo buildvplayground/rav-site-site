@@ -14,7 +14,7 @@
     { "n": 6, "nome": "Ajustes finais (imagens, responsivo)", "status": "done" },
     { "n": 7, "nome": "Tags e módulos LGPD", "status": "done" },
     { "n": 8, "nome": "Revisão humana", "status": "done", "nota": "2 rodadas de redesign (Premium+ com Montserrat/Inter, depois v2 com nova referência macro ot-engenharia) + ajustes finos de proporção/WCAG em 4 seções. Cliente aprovou: \"o design ficou bom agora\". Projeto reorganizado em deploy-obras/ e deploy-reformas/ (pastas independentes por LP). Rodada extra: cliente pediu mais seções com imagem (fullwidth/split) amarradas à copy — adicionadas 3 seções novas (faixa fullwidth, split imagem+texto, colagem em 'Sobre a RAV') com 6 fotos curadas de imagens/originais_obras/, sincronizado em Site/ e nas 2 pastas de deploy. Ver brief-pack.md §10." },
-    { "n": 9, "nome": "Deploy", "status": "blocked", "nota": "Pastas de deploy prontas (deploy-obras/, deploy-reformas/); falta hospedagem, domínio, secrets FTP/DB e confirmação da topologia de URL entre as 2 LPs (ver pendencias)." }
+    { "n": 9, "nome": "Deploy", "status": "in_progress", "nota": "Publicado na Vercel (rav-obras.vercel.app / rav-reformas.vercel.app). Cliente revisou o site publicado e enviou 2 PDFs de ajustes (ago/2026) — implementados em Site/ e resincronizados nas 2 pastas de deploy: correções de copy (crítico: removido 'equipe própria' -> foco em gestão; hero de Obras focado em prazo; itens de 'Por que a RAV'), galeria por segmento (clicar num segmento mostra fotos daquele tipo + lightbox), portfólios recompostos (Reformas focado em escritórios; Obras com laboratório + contabilidade), e 5 trocas de foto (2 heros residenciais -> comerciais, díptico de Obras, split de Reformas). RE-DEPLOY na Vercel PENDENTE p/ publicar os ajustes. Ver brief-pack.md §12." }
   ],
   "pendencias": [
     "Hospedagem final não definida (Vercel vs Hostinger/WordPress) — usando HTML estático + deploy-obras//deploy-reformas/ como pastas-irmãs como default",
@@ -26,13 +26,17 @@
     "Sem fotos 'antes' para comparação antes/depois (recomendada pela direcao-estilo.md) — só há fotos do resultado finalizado nas imagens tratadas; avaliar na curadoria de imagens brutas ainda não tratadas",
     "E-mail de contato oficial não definido — contato@ravobras.com.br usado como placeholder em db-config.php, form-handler.php e política de privacidade",
     "Backend PHP (form-handler.php/admin.php/db-config.example.php) instalado em cada pasta de deploy mas não configurado — falta host/banco/usuário/senha reais (2x, uma por LP, ou banco compartilhado com prefixos rav_obras_*) e troca da senha de admin antes do deploy",
-    "3 fotos brutas chegaram corrompidas (0 bytes) do Drive — re-baixar se forem necessárias (ver imagens/tratadas/MANIFESTO.md)"
+    "3 fotos brutas chegaram corrompidas (0 bytes) do Drive — re-baixar se forem necessárias (ver imagens/tratadas/MANIFESTO.md)",
+    "RE-DEPLOY na Vercel pendente para publicar os ajustes dos 2 PDFs (ago/2026) — não foi feito por este agente",
+    "Faltam fotos do cliente para completar exemplos por segmento/portfólio: Academia, Restaurante, Universidade, Igreja (e, se quiser, Franquias/redes e Mercados/supermercados na galeria). O próprio cliente ofereceu enviar. Enquanto isso, esses segmentos ficam com estado 'Fotos em breve' (não-clicáveis) e não aparecem no portfólio de Obras.",
+    "Cliente sugeriu mostrar 'em quanto tempo fizemos cada obra' na faixa/portfólio de Obras — precisa de dado real de prazo por obra (não fornecido); NÃO inventado. Aguardando dados."
   ],
   "links": {
     "drive": "https://drive.google.com/drive/folders/1-H2kNE2krNI2BOzBHW-6WSk9Vi2MHPWA",
     "repo": "https://github.com/dev-buildv/rav-site-site",
-    "preview": "http://localhost:8793/deploy-obras/index.html e http://localhost:8793/deploy-reformas/index.html",
+    "preview": "http://localhost:8791/ (Site/ fonte) · http://localhost:8792/deploy-obras/index.html e /deploy-reformas/index.html (deploy)",
+    "producao": "https://rav-obras.vercel.app / https://rav-reformas.vercel.app",
     "dominio": null
   },
-  "atualizado_em": "2026-08-11"
+  "atualizado_em": "2026-08-20"
 }

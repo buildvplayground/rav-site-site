@@ -114,15 +114,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 1. HERO -->
   <section class="rv-hero" id="hero">
     <div class="rv-hero-media">
-      <img src="assets/img/hero-obras.webp" alt="" class="rv-hero-img" width="960" height="1280" fetchpriority="high">
+      <img src="assets/img/hero-obras.webp" alt="" class="rv-hero-img" width="1280" height="720" fetchpriority="high">
       <div class="rv-hero-overlay"></div>
     </div>
     <span class="rv-hero-edge" aria-hidden="true">Especialistas desde 2004</span>
     <div class="container rv-hero-inner">
       <div class="rv-hero-content" data-reveal>
         <span class="rv-tag">Obras comerciais em São Paulo e região</span>
-        <h1>Sua obra comercial do início ao fim com um só responsável</h1>
-        <p class="rv-hero-lede">Do projeto à entrega da chave, um engenheiro responsável conduz tudo, com prazo e orçamento definidos em contrato.</p>
+        <h1>Marque a data de inauguração. A gente entrega sua obra comercial no prazo.</h1>
+        <p class="rv-hero-lede">Do projeto à entrega da chave, um engenheiro responsável conduz tudo com prazo e orçamento definidos em contrato — para você inaugurar no dia combinado.</p>
         <div class="rv-hero-actions">
           <a class="btn btn-primary btn-lg" href="https://wa.me/5511947018958?text=Ol%C3%A1%21%20Quero%20um%20or%C3%A7amento%20para%20minha%20obra%20comercial." target="_blank" rel="noopener noreferrer" data-wa-btn="obras">
             Solicitar orçamento
@@ -183,23 +183,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="rv-tag">Onde atuamos</span>
         <h2 class="rv-h2">Obras comerciais para cada tipo de operação</h2>
       </div>
-      <div class="rv-index-list" aria-label="Segmentos atendidos pela RAV Obras">
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">01</span><span class="rv-index-item-label">Escritórios corporativos</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">02</span><span class="rv-index-item-label">Lojas e varejo</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">03</span><span class="rv-index-item-label">Clínicas e consultórios</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">04</span><span class="rv-index-item-label">Laboratórios e medicina diagnóstica</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">05</span><span class="rv-index-item-label">Academias</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">06</span><span class="rv-index-item-label">Universidades e instituições de ensino</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">07</span><span class="rv-index-item-label">Franquias e redes</span></div>
-        <div class="rv-index-item" data-reveal><span class="rv-index-item-num">08</span><span class="rv-index-item-label">Mercados e supermercados</span></div>
+      <div class="rv-segments" data-segments>
+        <div class="rv-index-list" aria-label="Segmentos atendidos pela RAV Obras — selecione um para ver fotos">
+          <button type="button" class="rv-index-item" data-seg="escritorios" data-reveal aria-current="false">
+            <span class="rv-index-item-num">01</span><span class="rv-index-item-label">Escritórios corporativos</span>
+            <span class="rv-index-item-cue">Ver fotos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+          <button type="button" class="rv-index-item" data-seg="lojas" data-reveal aria-current="false">
+            <span class="rv-index-item-num">02</span><span class="rv-index-item-label">Lojas e varejo</span>
+            <span class="rv-index-item-cue">Ver fotos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+          <button type="button" class="rv-index-item" data-seg="clinicas" data-reveal aria-current="false">
+            <span class="rv-index-item-num">03</span><span class="rv-index-item-label">Clínicas e consultórios</span>
+            <span class="rv-index-item-cue">Ver fotos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+          <button type="button" class="rv-index-item" data-seg="laboratorios" data-reveal aria-current="false">
+            <span class="rv-index-item-num">04</span><span class="rv-index-item-label">Laboratórios e medicina diagnóstica</span>
+            <span class="rv-index-item-cue">Ver fotos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </button>
+          <div class="rv-index-item rv-index-item--soon" data-reveal aria-disabled="true">
+            <span class="rv-index-item-num">05</span><span class="rv-index-item-label">Academias</span>
+            <span class="rv-index-item-cue rv-index-item-cue--soon">Fotos em breve</span>
+          </div>
+          <div class="rv-index-item rv-index-item--soon" data-reveal aria-disabled="true">
+            <span class="rv-index-item-num">06</span><span class="rv-index-item-label">Universidades e instituições de ensino</span>
+            <span class="rv-index-item-cue rv-index-item-cue--soon">Fotos em breve</span>
+          </div>
+          <div class="rv-index-item rv-index-item--soon" data-reveal aria-disabled="true">
+            <span class="rv-index-item-num">07</span><span class="rv-index-item-label">Franquias e redes</span>
+            <span class="rv-index-item-cue rv-index-item-cue--soon">Fotos em breve</span>
+          </div>
+          <div class="rv-index-item rv-index-item--soon" data-reveal aria-disabled="true">
+            <span class="rv-index-item-num">08</span><span class="rv-index-item-label">Mercados e supermercados</span>
+            <span class="rv-index-item-cue rv-index-item-cue--soon">Fotos em breve</span>
+          </div>
+        </div>
+        <div class="rv-seg-panel" data-seg-panel aria-live="polite" aria-label="Fotos do segmento selecionado"></div>
       </div>
     </div>
     <figure class="rv-band" data-reveal>
       <img src="assets/img/secoes/obras-band.webp" alt="Parede de marcenaria com iluminação embutida, exemplo de acabamento entregue pela RAV em ambiente comercial" loading="lazy" width="1920" height="834">
       <figcaption class="rv-band-caption">
         <div class="container">
-          <span>Acabamento entregue pela RAV</span>
-          <p>Cada segmento recebe o mesmo padrão de acabamento, do projeto à entrega da chave.</p>
+          <span>Obras entregues no prazo</span>
+          <p>Cada obra comercial entregue na data combinada — do primeiro dia de canteiro à chave na sua mão.</p>
         </div>
       </figcaption>
     </figure>
@@ -249,15 +276,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="rv-split rv-light" id="responsavel" aria-labelledby="responsavel-h">
     <div class="rv-split-grid">
       <div class="rv-split-media" data-reveal>
-        <img src="assets/img/secoes/obras-split.webp" alt="Equipe própria da RAV Obras, com camisas identificadas, executando estrutura em obra comercial" loading="lazy" width="576" height="720">
+        <img src="assets/img/secoes/obras-split.webp" alt="Equipe em obra comercial conduzida pela gestão técnica da RAV" loading="lazy" width="576" height="720">
       </div>
       <div class="rv-split-text" data-reveal>
         <span class="rv-tag">Quem conduz sua obra</span>
-        <h2 class="rv-h2" id="responsavel-h">Uma equipe própria, identificada, sob gestão técnica</h2>
-        <p class="rv-lede">Cada frente da obra é conduzida por equipe própria da RAV, com engenheiro civil responsável acompanhando o andamento — a responsabilidade técnica do seu projeto não é terceirizada.</p>
+        <h2 class="rv-h2" id="responsavel-h">Uma gestão que cuida de toda a obra por você</h2>
+        <p class="rv-lede">A RAV coordena todas as equipes e frentes da obra sob a responsabilidade técnica de um engenheiro civil — você não precisa gerenciar prestador nenhum, é tudo conduzido por um só responsável.</p>
         <ul class="rv-split-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Engenheiro civil responsável (ART) em todas as obras</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Equipe própria e identificada, sem intermediários</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Gestão de todas as equipes e frentes, sem você se preocupar</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Acompanhamento técnico do início à entrega da chave</span></li>
         </ul>
       </div>
@@ -290,7 +317,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="rv-stroke-item" data-reveal>
           <span class="rv-stroke-num" aria-hidden="true">05</span>
-          <p>Equipes preparadas para início imediato após o contrato</p>
+          <p>Gestão próxima e empenhada em atender cada demanda do seu negócio</p>
         </div>
         <div class="rv-stroke-item" data-reveal>
           <span class="rv-stroke-num" aria-hidden="true">06</span>
@@ -352,10 +379,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rv-about-grid">
         <div class="rv-diptych" data-reveal>
           <div class="rv-diptych-a">
-            <img src="assets/img/sobre-equipe.webp" alt="Equipe RAV Obras em andaime durante execução de obra comercial" loading="lazy" width="1280" height="720">
+            <img src="assets/img/sobre-obras-a.webp" alt="Obra comercial em execução, coordenada pela gestão técnica da RAV" loading="lazy" width="1280" height="720">
           </div>
           <div class="rv-diptych-b">
-            <img src="assets/img/portfolio/obras-06.webp" alt="Copa e área de utilidades finalizada em obra comercial da RAV" loading="lazy" width="720" height="1280">
+            <img src="assets/img/sobre-obras-b.webp" alt="Recepção comercial finalizada com parede de tijolo e iluminação de destaque" loading="lazy" width="825" height="1100">
             <span class="rv-diptych-tag">Padrão de entrega</span>
           </div>
         </div>
@@ -396,19 +423,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rv-case-grid">
         <figure class="rv-case" data-reveal>
           <div class="rv-case-media">
-            <span class="rv-case-badge">Saúde</span>
-            <img src="assets/img/portfolio/obras-01.webp" alt="Consultório médico finalizado com equipe em atendimento" loading="lazy" width="1200" height="1600">
+            <span class="rv-case-badge">Laboratório</span>
+            <img src="assets/img/portfolio/obras-lab.webp" alt="Laboratório de medicina diagnóstica finalizado com analisadores sobre bancada de inox" loading="lazy" width="1050" height="1400">
           </div>
-          <div class="rv-case-meta"><span>Consultório médico</span><span>São Paulo, SP</span></div>
-          <figcaption class="rv-case-title">Consultório médico — entrega completa</figcaption>
+          <div class="rv-case-meta"><span>Laboratório</span><span>São Paulo, SP</span></div>
+          <figcaption class="rv-case-title">Laboratório e medicina diagnóstica</figcaption>
         </figure>
         <figure class="rv-case" data-reveal>
           <div class="rv-case-media">
-            <span class="rv-case-badge">Saúde</span>
-            <img src="assets/img/portfolio/obras-02.webp" alt="Fileira de cubículos de exame corporativos finalizados" loading="lazy" width="1280" height="720">
+            <span class="rv-case-badge">Escritório</span>
+            <img src="assets/img/portfolio/obras-contab.webp" alt="Escritório de contabilidade finalizado com estações de trabalho e computadores" loading="lazy" width="1280" height="720">
           </div>
-          <div class="rv-case-meta"><span>Sala de exames</span><span>São Paulo, SP</span></div>
-          <figcaption class="rv-case-title">Medicina diagnóstica</figcaption>
+          <div class="rv-case-meta"><span>Escritório de contabilidade</span><span>São Paulo, SP</span></div>
+          <figcaption class="rv-case-title">Área administrativa e contábil</figcaption>
+        </figure>
+        <figure class="rv-case" data-reveal>
+          <div class="rv-case-media">
+            <span class="rv-case-badge">Clínica</span>
+            <img src="assets/img/portfolio/obras-01.webp" alt="Consultório médico finalizado com equipe em atendimento" loading="lazy" width="1200" height="1600">
+          </div>
+          <div class="rv-case-meta"><span>Clínica e consultórios</span><span>São Paulo, SP</span></div>
+          <figcaption class="rv-case-title">Clínica e consultórios</figcaption>
         </figure>
         <figure class="rv-case" data-reveal>
           <div class="rv-case-media">
@@ -420,27 +455,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </figure>
         <figure class="rv-case" data-reveal>
           <div class="rv-case-media">
-            <span class="rv-case-badge">Corporativo</span>
-            <img src="assets/img/portfolio/obras-04.webp" alt="Escritório aberto finalizado com piso vinílico e cadeiras laranja" loading="lazy" width="1280" height="720">
-          </div>
-          <div class="rv-case-meta"><span>Escritório aberto</span><span>São Paulo, SP</span></div>
-          <figcaption class="rv-case-title">Piso vinílico de padrão comercial</figcaption>
-        </figure>
-        <figure class="rv-case" data-reveal>
-          <div class="rv-case-media">
-            <span class="rv-case-badge">Laboratório</span>
-            <img src="assets/img/portfolio/obras-05.webp" alt="Sala de equipamentos de laboratório finalizada" loading="lazy" width="1200" height="1600">
-          </div>
-          <div class="rv-case-meta"><span>Laboratório</span><span>São Paulo, SP</span></div>
-          <figcaption class="rv-case-title">Infraestrutura de equipamentos</figcaption>
-        </figure>
-        <figure class="rv-case" data-reveal>
-          <div class="rv-case-media">
             <span class="rv-case-badge">Saúde</span>
-            <img src="assets/img/portfolio/obras-07.webp" alt="Consultórios numerados com piso de granito finalizados" loading="lazy" width="1200" height="1600">
+            <img src="assets/img/portfolio/obras-02.webp" alt="Fileira de cubículos de exame corporativos finalizados" loading="lazy" width="1280" height="720">
           </div>
-          <div class="rv-case-meta"><span>Consultórios numerados</span><span>São Paulo, SP</span></div>
-          <figcaption class="rv-case-title">Bloco de consultórios</figcaption>
+          <div class="rv-case-meta"><span>Medicina diagnóstica</span><span>São Paulo, SP</span></div>
+          <figcaption class="rv-case-title">Sala de exames</figcaption>
+        </figure>
+        <figure class="rv-case" data-reveal>
+          <div class="rv-case-media">
+            <span class="rv-case-badge">Corporativo</span>
+            <img src="assets/img/portfolio/obras-04.webp" alt="Escritório aberto finalizado com piso vinílico e estações de trabalho" loading="lazy" width="1280" height="720">
+          </div>
+          <div class="rv-case-meta"><span>Escritório administrativo</span><span>São Paulo, SP</span></div>
+          <figcaption class="rv-case-title">Open space em piso vinílico</figcaption>
         </figure>
       </div>
     </div>
@@ -675,5 +702,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script src="js/app.js"></script>
+
 </body>
 </html>
