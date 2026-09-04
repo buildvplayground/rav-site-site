@@ -110,13 +110,13 @@ main{display:block}
 
 /* Seções — a base agora é ESCURA (era clara na proposta anterior); o claro
    fica reservado a pausas pontuais. */
-.rv-section{padding:120px 0;position:relative}
+.rv-section{padding:80px 0;position:relative}
 .rv-dark{background:var(--color-dark);color:#fff}
 .rv-light{background:var(--color-light);color:var(--dark-900)}
 .rv-dark .rv-lede{color:var(--dark-200)}
 .rv-light .rv-lede{color:var(--dark-500)}
 
-.rv-head{max-width:680px;margin-bottom:64px}
+.rv-head{max-width:680px;margin-bottom:40px}
 .rv-head.rv-center{margin-left:auto;margin-right:auto;text-align:center}
 .rv-lede{font-family:var(--font-body);font-size:16.5px}
 
@@ -126,13 +126,13 @@ main{display:block}
   display:inline-flex;align-items:center;gap:12px;
   font-family:var(--font-display);font-size:12px;font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;color:var(--color-gold);
-  margin-bottom:22px;
+  margin-bottom:16px;
 }
 .rv-light .rv-tag{color:var(--gold-ink)}
 .rv-head.rv-center .rv-tag{justify-content:center}
 
-.rv-h2{font-size:clamp(30px,4vw,46px);font-weight:800;margin-bottom:18px}
-.rv-cta-row{margin-top:52px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.rv-h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;margin-bottom:14px}
+.rv-cta-row{margin-top:36px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .rv-head.rv-center + .rv-cta-row,
 .rv-cta-row.rv-center{align-items:center;margin-left:auto;margin-right:auto;text-align:center}
 .rv-micro{font-family:var(--font-body);font-size:13.5px;color:var(--dark-400);font-style:italic}
@@ -240,12 +240,15 @@ main{display:block}
    qualquer posição plausível do topo do texto (~25-29% da altura do hero
    nas duas LPs) — só o topo (~12%) fica mais claro para respirar a foto. */
 .rv-hero-overlay{background:linear-gradient(180deg,rgba(17,17,19,.10) 0%,rgba(17,17,19,.50) 12%,rgba(17,17,19,.88) 25%,rgba(17,17,19,.94) 100%)}
-.rv-hero-inner{position:relative;z-index:1;padding:calc(var(--header-h) + 64px) 24px 80px;width:100%}
-.rv-hero-content{max-width:840px}
+.rv-hero-inner{position:relative;z-index:1;padding:calc(var(--header-h) + 40px) 24px 64px;width:100%}
+.rv-hero-content{max-width:940px}
 .rv-hero-content .rv-tag{color:var(--color-gold-light)}
-.rv-hero h1{font-size:clamp(36px,5.6vw,68px);font-weight:800;letter-spacing:-.02em;margin-bottom:24px;color:#fff}
-.rv-hero-lede{font-family:var(--font-body);font-size:18px;color:var(--dark-100);margin-bottom:36px;max-width:54ch}
-.rv-hero-bullets{margin-bottom:36px;display:flex;flex-direction:column;gap:14px}
+/* clamp reduzido (68->50px) + coluna mais larga (840->940px): o cliente
+   reclamou que os H1 quebravam em linhas demais; assim caem em 2-3 linhas
+   equilibradas (text-wrap:balance já ativo em h1). */
+.rv-hero h1{font-size:clamp(32px,4.6vw,50px);font-weight:800;letter-spacing:-.02em;margin-bottom:18px;color:#fff}
+.rv-hero-lede{font-family:var(--font-body);font-size:18px;color:var(--dark-100);margin-bottom:28px;max-width:54ch}
+.rv-hero-bullets{margin-bottom:28px;display:flex;flex-direction:column;gap:12px}
 .rv-hero-bullets li{font-family:var(--font-body);display:flex;gap:10px;font-size:16px;color:var(--dark-100);align-items:flex-start}
 .rv-hero-bullets svg{width:19px;height:19px;flex-shrink:0;margin-top:2px;color:var(--color-gold-light)}
 .rv-hero-actions{margin-bottom:20px}
@@ -266,7 +269,7 @@ main{display:block}
 .rv-marquee{display:flex;width:max-content;animation:rv-marquee 34s linear infinite}
 .rv-marquee:hover{animation-play-state:paused}
 .rv-marquee-item{
-  display:flex;align-items:center;gap:28px;padding:22px 0;flex-shrink:0;
+  display:flex;align-items:center;gap:28px;padding:18px 0;flex-shrink:0;
 }
 .rv-marquee-item span{
   font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.03em;
@@ -279,7 +282,7 @@ main{display:block}
 /* ============ GRID NUMERADO ASSIMÉTRICO (Escopo / Por que a RAV) ======== */
 .rv-num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(181,153,117,.18)}
 .rv-light .rv-num-grid{background:rgba(24,24,27,.08)}
-.rv-num-item{background:inherit;padding:40px 36px;position:relative;display:flex;flex-direction:column}
+.rv-num-item{background:inherit;padding:30px 32px;position:relative;display:flex;flex-direction:column}
 .rv-dark .rv-num-item{background:var(--color-dark)}
 .rv-light .rv-num-item{background:var(--color-light)}
 .rv-num-item--wide{grid-column:span 2}
@@ -304,7 +307,7 @@ main{display:block}
 
 /* Variante "stroke" (números vazados) para "Por que a RAV" */
 .rv-stroke-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.rv-stroke-item{padding:32px 28px 28px;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.rv-stroke-item{padding:26px 24px 24px;position:relative;overflow:hidden;min-height:168px;display:flex;flex-direction:column;justify-content:flex-end}
 .rv-stroke-num{
   position:absolute;top:16px;left:24px;font-family:var(--font-display);font-weight:800;
   font-size:64px;line-height:1;color:rgba(181,153,117,.34);z-index:0;
@@ -328,7 +331,7 @@ main{display:block}
 /* ============ ÍNDICE EDITORIAL (Onde atuamos / reformamos) ============= */
 .rv-index-list{border-top:1px solid rgba(181,153,117,.2)}
 .rv-index-item{
-  display:flex;align-items:baseline;gap:24px;padding:22px 0;
+  display:flex;align-items:baseline;gap:24px;padding:16px 0;
   border-bottom:1px solid rgba(181,153,117,.2);position:relative;
 }
 .rv-index-item-num{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--color-gold);width:36px;flex-shrink:0}
@@ -435,7 +438,7 @@ button.rv-index-item.is-active::after{width:100%}
 }
 
 /* ============ CITAÇÃO FULL-BLEED (depoimento) =========================== */
-#confianca{padding-top:84px}
+#confianca{padding-top:64px}
 .rv-quote{max-width:720px;margin:0 auto;text-align:center;position:relative}
 .rv-quote-mark{font-family:var(--font-display);font-size:44px;font-weight:800;color:var(--color-gold);line-height:1;margin-bottom:4px;display:block}
 .rv-quote p{
@@ -450,7 +453,7 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-timeline{display:flex;flex-direction:column}
 .rv-timeline-row{
   display:grid;grid-template-columns:160px 1fr;gap:32px;
-  padding:36px 0;border-top:1px solid rgba(181,153,117,.25);align-items:flex-start;
+  padding:26px 0;border-top:1px solid rgba(181,153,117,.25);align-items:flex-start;
 }
 .rv-timeline-row:last-child{border-bottom:1px solid rgba(181,153,117,.25)}
 /* O ano é conteúdo real (não decorativo), então precisa de 3:1 (é "texto
@@ -478,7 +481,7 @@ button.rv-index-item.is-active::after{width:100%}
    ========================================================================== */
 
 /* ---- Faixa de imagem fullwidth (dentro de "Onde atuamos/reformamos") --- */
-.rv-band{position:relative;width:100%;height:clamp(220px,32vw,380px);overflow:hidden;margin-top:64px}
+.rv-band{position:relative;width:100%;height:clamp(220px,32vw,380px);overflow:hidden;margin-top:48px}
 .rv-band img{width:100%;height:100%;object-fit:cover;display:block}
 /* O piso seguro precisa começar a uma distância FIXA em px do rodapé (não a
    uma % da altura da faixa) — numa faixa curta (220px no clamp mínimo), um
@@ -498,7 +501,7 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-split-grid{display:grid;grid-template-columns:1fr 1fr;min-height:540px}
 .rv-split-media{position:relative;overflow:hidden;background:var(--dark-800)}
 .rv-split-media img{width:100%;height:100%;object-fit:cover;display:block}
-.rv-split-text{display:flex;flex-direction:column;justify-content:center;padding:72px clamp(28px,6vw,88px)}
+.rv-split-text{display:flex;flex-direction:column;justify-content:center;padding:52px clamp(28px,6vw,80px)}
 .rv-split-text .rv-lede{margin-bottom:0}
 .rv-split-list{margin-top:28px;display:flex;flex-direction:column;gap:18px}
 .rv-split-list li{display:flex;gap:12px;align-items:flex-start;font-family:var(--font-body);font-size:15px}
@@ -627,7 +630,7 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-faq-list{border-top:1px solid rgba(24,24,27,.12)}
 .rv-faq-item{border-bottom:1px solid rgba(24,24,27,.12)}
 .rv-faq-q{
-  width:100%;display:flex;align-items:center;gap:20px;padding:22px 4px;
+  width:100%;display:flex;align-items:center;gap:20px;padding:16px 4px;
   text-align:left;font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--color-dark);
   transition:color var(--t-fast);
 }
@@ -637,7 +640,7 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-faq-q-icon{width:20px;height:20px;flex-shrink:0;color:var(--gold-ink);transition:transform var(--t-base)}
 .rv-faq-item[data-open="true"] .rv-faq-q-icon{transform:rotate(45deg)}
 .rv-faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease-house)}
-.rv-faq-a p{font-family:var(--font-body);padding:0 4px 24px 46px;color:var(--dark-500);font-size:15px;max-width:62ch}
+.rv-faq-a p{font-family:var(--font-body);padding:0 4px 18px 46px;color:var(--dark-500);font-size:15px;max-width:62ch}
 @media (max-width:800px){.rv-faq-layout{grid-template-columns:1fr;gap:32px}}
 
 /* ============ CTA FINAL — passos horizontais + glow radial ============== */
@@ -663,7 +666,7 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-steps-row.is-in .rv-step-dot{background:var(--gradient-gold);border-color:transparent;color:var(--color-dark)}
 .rv-step h3{font-size:17px;font-weight:700;margin-bottom:8px;color:#fff}
 .rv-step p{font-family:var(--font-body);font-size:14px;color:var(--dark-300)}
-.rv-cta-actions{margin-top:56px;text-align:center;position:relative;z-index:1}
+.rv-cta-actions{margin-top:40px;text-align:center;position:relative;z-index:1}
 .rv-cta-actions .btn{margin-bottom:12px}
 .rv-cta-actions p{font-family:var(--font-body);color:var(--dark-300);font-size:13.5px;font-style:italic}
 @media (max-width:700px){
@@ -682,7 +685,7 @@ button.rv-index-item.is-active::after{width:100%}
 
 /* ============ FOOTER — colunas densas, coluna própria de área de atendimento */
 .rv-footer{background:var(--color-dark-2);color:var(--dark-300)}
-.rv-footer-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:40px;padding:88px 24px 56px}
+.rv-footer-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:40px;padding:64px 24px 48px}
 .rv-footer-brand img{height:32px;margin-bottom:20px}
 .rv-footer-brand p{font-family:var(--font-body);font-size:13.5px;color:var(--dark-300);margin-bottom:24px;max-width:32ch;line-height:1.6}
 .rv-footer-title{font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--dark-300);margin-bottom:18px;font-weight:700}
@@ -703,12 +706,12 @@ button.rv-index-item.is-active::after{width:100%}
 
 /* ============ RESPONSIVO GERAL DE SEÇÃO ============ */
 @media (max-width:900px){
-  .rv-section{padding:88px 0}
-  .rv-head{margin-bottom:48px}
+  .rv-section{padding:60px 0}
+  .rv-head{margin-bottom:32px}
 }
 @media (max-width:560px){
-  .rv-section{padding:64px 0}
-  .rv-h2{font-size:28px}
+  .rv-section{padding:48px 0}
+  .rv-h2{font-size:26px}
 }
 
 /* ============ LINK-BOTÃO (footer, abre modais) ============ */
