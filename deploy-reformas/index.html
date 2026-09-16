@@ -53,15 +53,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
   waitForElm('.merlin-button').then(function() {
-    for (var i = 1; i <= 15; i++) {
-      var el = document.getElementById('cta-merlin' + i);
-      if (el) {
-        el.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelector('.merlin-button').click();
-        });
-      }
-    }
+    var ctas = document.querySelectorAll('[data-wa-btn], [id^="cta-merlin"]');
+    Array.prototype.forEach.call(ctas, function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.merlin-button').click();
+      });
+    });
   });
 </script>
 <!-- /MERLIN -->
