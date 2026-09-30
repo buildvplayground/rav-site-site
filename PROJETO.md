@@ -2,14 +2,14 @@
 
 Iniciado em: 2026-08-10
 Cliente: Rav Obras Ltda (CNPJ 07.666.573-0001/06)
-Contato comercial: Vittor Rodrigues — WhatsApp (11) 94701-8958
+Contato comercial: Vittor Rodrigues — WhatsApp (11) 97072-0145
 
 ## Escopo
 Duas landing pages independentes, alto nível de consciência (tráfego Google Search):
 1. **LP Obras Comerciais** — obra comercial completa (turnkey), do projeto à entrega da chave.
 2. **LP Reformas Comerciais** — reforma comercial focada em drywall, pisos (vinílico/laminado) e acabamentos, sem parar a operação do cliente.
 
-CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 94701-8958.
+CTA padrão das duas: botão "Solicitar orçamento" → WhatsApp (11) 97072-0145.
 
 ## Inventário do material
 - `Marca/`: 3 arquivos — MIV (PDF, 17 páginas) + 2 versões do logotipo "RAV" extraídas do MIV (fundo claro e fundo escuro, PNG transparente). Marca é só wordmark, sem ícone/monograma dedicado.
@@ -44,7 +44,7 @@ diferentes, ou nomes de pasta diferentes), esses links precisam ser reajustados 
 - Hospedagem final (Vercel vs Hostinger/WordPress) e a topologia exata das 2 pastas (ver acima) — usando HTML estático + pastas-irmãs como default até decisão.
 - GTM/GA4/Meta Pixel/Google Ads IDs — não fornecidos, módulos de tag pulados (o cookie consent já dispara `dataLayer`, pronto para quando o GTM entrar).
 - Domínio final das 2 LPs — canonical usa `www.ravobras.com.br` (Obras) e `www.ravobras.com.br/reformas/` (Reformas) como placeholder.
-- Confirmação do WhatsApp (11) 94701-8958 como número oficial de conversão (aparece também um número alternativo 11 94791-3486 no PDF institucional — sinalizado para reconciliação do cliente).
+- ~~Confirmação do WhatsApp oficial~~ — resolvido em 30/09/2026: número oficial de conversão definido como (11) 97072-0145 (substituiu o (11) 94701-8958 da copy; o 11 94791-3486 do PDF institucional não é usado).
 - E-mail de contato oficial (usado `contato@ravobras.com.br` como placeholder no backend/política de privacidade).
 - Backend PHP (`form-handler.php`/`admin.php`/`db-config.example.php`) instalado em cada pasta de deploy mas não configurado — falta host/banco/usuário/senha reais (criar `db-config.php` real direto no servidor, nunca versionar) e nova senha de admin antes do deploy. Como são 2 pastas, isso é necessário 2x (uma config por LP) — ou apontar as duas para o mesmo banco com prefixos diferentes (`rav_obras_*` já é o prefixo usado).
 - 3 fotos brutas corrompidas no download do Drive (0 bytes) — ver `imagens/tratadas/MANIFESTO.md`.

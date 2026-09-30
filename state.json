@@ -21,7 +21,7 @@
     "Topologia de URL assumida entre as 2 LPs: deploy-obras/ = raiz do domínio, deploy-reformas/ renomeada para 'reformas/' como subpasta irmã — os links internos (../reformas/, ../obras/) dependem dessa renomeação no upload; se a hospedagem final for outra (subdomínios, domínios separados), reajustar os links antes do deploy",
     "GTM/GA4/Meta Pixel/Google Ads IDs não fornecidos — módulos de tag pulados (cookie consent já dispara dataLayer, pronto para quando o GTM for instalado)",
     "Domínio final das 2 LPs não definido — canonical/URLs no HTML usam www.ravobras.com.br (Obras) e www.ravobras.com.br/reformas/ (Reformas) como placeholder, atualizar quando o domínio for definido",
-    "Discrepância de telefone: copy usa (11) 94701-8958, PDF institucional traz (11) 94791-3486 — cliente precisa confirmar o número oficial",
+    "Telefone resolvido (30/09/2026): número oficial (11) 97072-0145 em todas as LPs (substituiu (11) 94701-8958)",
     "Marca não tem ícone/monograma dedicado (só wordmark) — favicon SVG derivado da letra R sobre fundo escuro, cliente pode querer um ícone próprio no futuro",
     "Sem fotos 'antes' para comparação antes/depois (recomendada pela direcao-estilo.md) — só há fotos do resultado finalizado nas imagens tratadas; avaliar na curadoria de imagens brutas ainda não tratadas",
     "E-mail de contato oficial não definido — contato@ravobras.com.br usado como placeholder em db-config.php, form-handler.php e política de privacidade",
