@@ -551,6 +551,8 @@ button.rv-index-item.is-active::after{width:100%}
 .rv-diptych-a,.rv-diptych-b{position:absolute;left:0;right:0;overflow:hidden;background:var(--dark-800)}
 .rv-diptych-a{top:0;height:60%}
 .rv-diptych-b{top:calc(60% + 4px);bottom:0}
+/* Variante com UMA foto (LP Obras, out/2026, pedido do cliente): a foto ocupa o bloco todo. */
+.rv-diptych--single .rv-diptych-a{height:100%}
 .rv-diptych-a img,.rv-diptych-b img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .rv-diptych-tag{
   position:absolute;left:16px;bottom:16px;z-index:1;
@@ -566,6 +568,7 @@ button.rv-index-item.is-active::after{width:100%}
   .rv-diptych-a,.rv-diptych-b{position:static;width:100%;height:auto;top:auto;bottom:auto}
   .rv-diptych-a{aspect-ratio:16/10}
   .rv-diptych-b{aspect-ratio:16/11;margin-top:4px}
+  .rv-diptych--single .rv-diptych-a{aspect-ratio:4/5;max-height:72vh}
 }
 
 /* ============ GRID DE CASOS / PORTFÓLIO — legenda editorial abaixo ====== */
